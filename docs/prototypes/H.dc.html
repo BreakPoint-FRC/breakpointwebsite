@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>H — Kırılma ve Kaynak</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Roboto+Condensed:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#12100C;font-synthesis:none}
+a{color:#FED233;text-decoration:none}a:hover{color:#FFFFFF}
+.bp-scroller{scrollbar-width:none}
+.bp-scroller::-webkit-scrollbar{display:none}
+@keyframes bpPulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.8);opacity:0}}
+@keyframes bpBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.bp-pulse{animation:bpPulse 1.8s ease-out infinite}
+.bp-caret{animation:bpBlink 1.1s steps(1) infinite}
+.bp-input::placeholder{color:#ABA597}
+.bp-input:focus{outline:2px solid #FED233;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.bp-pulse,.bp-caret{animation:none}}
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: {{bg}}; color: #FFFFFF; font-family: 'Roboto Condensed', 'Arial Narrow', sans-serif">
+
+  <header style="position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 40px 0 72px; box-sizing: border-box; background: {{bg}}; border-bottom: 1px solid {{line}}">
+    <a href="#" style="display: flex; align-items: center; gap: 14px; color: #FFFFFF">
+      <span style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #FED233; color: {{bg}}; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 22px; clip-path: polygon(0 0, 100% 0, 100% 64%, 76% 58%, 62% 100%, 0 100%)">BP</span>
+      <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 19px; letter-spacing: 2px">BREAKPOINT</span><span style="font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; color: {{muted}}">FRC · 12050 · [ŞEHİR]</span></span>
+    </a>
+    <nav aria-label="Ana menü" style="display: flex; align-items: center; gap: 32px; font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase">
+      <a href="#" style="color: #FFFFFF">FRC nedir</a>
+      <a href="#" style="color: #FFFFFF">Robot</a>
+      <a href="#" style="color: #FFFFFF">Takım</a>
+      <a href="#" style="color: #FFFFFF">Sponsorluk</a>
+      <span style="display: flex; gap: 8px; font-size: 13px"><span style="color: #FFFFFF">TR</span><span style="color: {{line}}">/</span><a href="#" style="color: {{muted}}">EN</a></span>
+      <a href="#" style="padding: 13px 20px; background: #FED233; color: {{bg}}; font-weight: 600">Sponsor Ol</a>
+    </nav>
+  </header>
+
+  <div class="bp-scroller" ref="{{scrollRef}}" onScroll="{{onScroll}}" style="position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden">
+
+    <section aria-label="Giriş" style="position: relative; height: 2200px">
+      <div style="position: sticky; top: 0; height: 900px; overflow: hidden; background: {{surface}}">
+        <div style="position: absolute; left: 50%; top: 50%; width: 880px; height: 580px; margin: -260px 0 0 -440px; display: flex; align-items: center; justify-content: center; background: {{bg}}; clip-path: polygon(0 0, 94% 0, 100% 9%, 100% 100%, 6% 100%, 0 91%); transform: scale({{photoS}}); opacity: {{photoO}}">
+          <span style="font-family: 'Oswald', sans-serif; font-size: 15px; letter-spacing: 3px; color: {{muted}}">[ROBOT VİDEO DÖNGÜSÜ / FOTOĞRAF]</span>
+        </div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 40px; display: flex; justify-content: center; gap: 28px; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 18px; letter-spacing: 5px; color: #FED233; opacity: {{revealO}}"><span>[ROBOT ADI]</span><span>●</span><span>[YIL] ROBOTU</span></div>
+
+        <div style="position: absolute; inset: 0; background: {{bg}}; clip-path: polygon(0 0, 60% 0, 57% 14%, 62% 24%, 52% 38%, 47% 46%, 49% 55%, 45% 64%, 47% 76%, 41% 88%, 43% 100%, 0 100%); transform-origin: 0% 50%; transform: {{leftT}}">
+          <div style="position: absolute; left: 0; right: 0; top: 140px; display: flex; flex-direction: column; font-family: 'JetBrains Mono', monospace; font-size: 20px">
+            <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); height: 46px; align-items: center"><span style="padding-right: 24px; text-align: right; font-size: 14px; color: {{line}}">01</span><span style="padding-left: 16px; border-left: 1px solid {{line}}; line-height: 46px; color: {{muted}}">// FIRST Robotics Competition · Takım 12050</span></div>
+            <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); height: 46px; align-items: center"><span style="padding-right: 24px; text-align: right; font-size: 14px; color: {{line}}">02</span><span style="padding-left: 16px; border-left: 1px solid {{line}}; line-height: 46px"><span style="color: #FED233">takim</span> BreakPoint <span style="color: {{muted}}">{</span></span></div>
+            <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); height: 256px; align-items: center; margin: 12px 0; background: #FED233; color: {{bg}}">
+              <span style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding-right: 24px; font-size: 14px"><span style="width: 14px; height: 14px; border-radius: 50%; background: {{bg}}"></span>03</span>
+              <h1 style="margin: 0; padding-left: 16px; border-left: 1px solid {{bg}}; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 232px; line-height: 256px; letter-spacing: 2px; white-space: nowrap">BREAKPOINT</h1>
+            </div>
+            <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); height: 46px; align-items: center"><span style="padding-right: 24px; text-align: right; font-size: 14px; color: {{line}}">04</span><span style="padding-left: 16px; border-left: 1px solid {{line}}; line-height: 46px; color: {{muted}}">}</span></div>
+          </div>
+        </div>
+
+        <div style="position: absolute; inset: 0; background: {{bg}}; clip-path: polygon(60% 0, 100% 0, 100% 100%, 43% 100%, 41% 88%, 47% 76%, 45% 64%, 49% 55%, 47% 46%, 52% 38%, 62% 24%, 57% 14%); transform-origin: 100% 50%; transform: {{rightT}}">
+          <div style="position: absolute; left: 0; right: 0; top: 140px; display: flex; flex-direction: column; font-family: 'JetBrains Mono', monospace; font-size: 20px">
+            <div style="height: 46px"></div><div style="height: 46px"></div>
+            <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); height: 256px; align-items: center; margin: 12px 0; background: #FED233; color: {{bg}}">
+              <span></span>
+              <div aria-hidden="true" style="padding-left: 16px; border-left: 1px solid {{bg}}; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 232px; line-height: 256px; letter-spacing: 2px; white-space: nowrap">BREAKPOINT</div>
+            </div>
+          </div>
+          <div style="position: absolute; right: 64px; bottom: 60px; width: 560px; display: flex; flex-direction: column; gap: 24px">
+            <p style="margin: 0; font-size: 24px; line-height: 1.4; color: #FFFFFF">[OKUL] öğrencileriyiz. Robotumuzu kendimiz tasarlıyor, üretiyor ve programlıyoruz.</p>
+            <div style="display: flex; gap: 14px">
+              <a href="#" style="padding: 18px 28px; background: #FED233; color: {{bg}}; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 2px">SPONSOR OL</a>
+              <a href="#" style="padding: 18px 28px; border: 1px solid #FFFFFF; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 16px; letter-spacing: 2px">PAKETLERİ GÖR</a>
+            </div>
+          </div>
+          <div aria-hidden="true" style="position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 4px; color: {{muted}}; opacity: {{hintO}}">KAYDIR, KIR
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+          </div>
+        </div>
+
+        <svg width="1440" height="900" viewBox="0 0 1440 900" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; opacity: {{crackO}}">
+          <polyline points="864,0 820.8,126 892.8,216 748.8,342 676.8,414 705.6,495 648,576 676.8,684 590.4,792 619.2,900" fill="none" stroke="#FED233" stroke-width="3"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <section aria-label="FRC nedir" style="height: 900px; box-sizing: border-box; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-content: center; padding: 72px 64px 0 112px">
+      <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 24px; opacity: {{s2O}}; transform: translateY({{s2Y}})">
+        <span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 4px; color: {{muted}}"><span style="color: #FED233">●</span>  02  FRC NEDİR?</span>
+        <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 76px; line-height: 0.92; text-transform: uppercase">Lise öğrencileri,<br><span style="color: #FED233">gerçek mühendislik.</span></h2>
+        <p style="margin: 0; font-size: 20px; line-height: 1.6; color: {{muted}}">FIRST Robotics Competition'da lise takımları, kısıtlı bir sürede sıfırdan endüstriyel ölçekte bir robot tasarlar, üretir, programlar ve uluslararası turnuvalarda yarıştırır.</p>
+      </div>
+      <div style="grid-column: 7 / span 6; display: flex; flex-direction: column">
+        <sc-for list="{{facts}}" as="f" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: 260px minmax(0, 1fr); align-items: baseline; gap: 24px; padding: 28px 0; border-top: 1px solid {{line}}; opacity: {{f.o}}; transform: translateY({{f.y}})">
+            <span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 88px; line-height: 1; color: #FED233">{{f.n}}</span>
+            <span style="font-size: 20px; line-height: 1.45">{{f.t}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-label="Robot" style="position: relative; height: 3400px">
+      <div style="position: sticky; top: 0; height: 900px; overflow: hidden; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 112px 40px 40px 112px; box-sizing: border-box">
+        <div style="grid-column: span 7; position: relative; overflow: hidden; background: {{surface}}; border: 1px solid {{line}}">
+          <div style="position: absolute; inset: 0; transform-origin: {{camOrigin}}; transform: scale({{camScale}}); transition: transform 1s cubic-bezier(.65,0,.35,1), transform-origin 1s cubic-bezier(.65,0,.35,1)">
+            <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 3px; color: {{muted}}">[ROBOT FOTOĞRAFI — yandan, dekupe]</span>
+            <sc-for list="{{parts}}" as="pt" hint-placeholder-count="4">
+              <span style="position: absolute; left: {{pt.x}}; top: {{pt.y}}; width: 20px; height: 20px; margin: -10px 0 0 -10px">
+                <span class="bp-pulse" style="position: absolute; inset: 0; border-radius: 50%; background: #FED233; opacity: {{pt.pulseO}}"></span>
+                <span style="position: absolute; inset: 0; border-radius: 50%; box-sizing: border-box; border: 2px solid #FED233; background: {{pt.dotFill}}"></span>
+              </span>
+            </sc-for>
+          </div>
+          <div style="position: absolute; left: 20px; top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: {{muted}}">robot.parca[{{partIdx}}]</div>
+        </div>
+        <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; justify-content: center; gap: 28px">
+          <span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 4px; color: {{muted}}"><span style="color: #FED233">●</span>  03  ROBOT, PARÇA PARÇA</span>
+          <div style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 200px; line-height: 0.85; color: transparent; -webkit-text-stroke: 2px #FED233">{{partNo}}</div>
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <h2 style="margin: 0; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 52px; line-height: 1; text-transform: uppercase">{{partName}}</h2>
+            <p style="margin: 0; font-size: 19px; line-height: 1.5; color: {{muted}}">{{partSub}}</p>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{parts}}" as="pt" hint-placeholder-count="4"><span style="height: 4px; background: {{pt.bar}}"></span></sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Takım" style="height: 1100px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 48px; padding: 72px 64px 0 112px">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 48px">
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 4px; color: {{muted}}"><span style="color: #FED233">●</span>  04  TAKIM</span>
+          <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 80px; line-height: 0.92; text-transform: uppercase">[N] öğrenci.<br><span style="color: #FED233">Dört ekip. Tek robot.</span></h2>
+        </div>
+        <a href="#" style="padding: 18px 28px; border: 1px solid #FED233; color: #FED233; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 2px">TAKIMA KATIL →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px">
+        <sc-for list="{{team}}" as="m" hint-placeholder-count="10">
+          <div style="display: flex; flex-direction: column; gap: 10px; opacity: {{m.o}}; transform: translateY({{m.y}})">
+            <div style="height: 240px; display: flex; align-items: center; justify-content: center; background: {{surface}}; border: 1px solid {{line}}; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; color: {{muted}}">[PORTRE]</div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px"><span style="color: {{muted}}">{{m.k}}:</span> <span style="color: #FFFFFF">"[AD]"</span></span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-label="Manifesto" style="position: relative; height: 1600px">
+      <div style="position: sticky; top: 0; height: 900px; display: flex; flex-direction: column; justify-content: center; gap: 36px; padding: 72px 160px 0; box-sizing: border-box">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; color: {{muted}}"><span style="color: #FED233">●</span> 05   // manifesto</span>
+        <p style="margin: 0; display: flex; flex-wrap: wrap; column-gap: 28px; row-gap: 4px; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 116px; line-height: 1.02; text-transform: uppercase">
+          <sc-for list="{{words}}" as="w" hint-placeholder-count="8"><span style="color: {{w.c}}; opacity: {{w.o}}">{{w.t}}</span></sc-for>
+        </p>
+      </div>
+    </section>
+
+    <section aria-label="Sponsor yörüngesi" style="position: relative; height: 2600px; background: {{surface}}">
+      <div style="position: sticky; top: 0; height: 900px; overflow: hidden; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center; padding: 72px 40px 0 112px; box-sizing: border-box">
+        <div style="grid-column: span 5; position: relative; height: 520px">
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 28px; opacity: {{orbitTextO}}">
+            <span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 4px; color: {{muted}}"><span style="color: #FED233">●</span>  06  SPONSORLUK</span>
+            <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 92px; line-height: 0.9; text-transform: uppercase">Robotumuzun<br><span style="color: #FED233">yörüngesine</span><br>girin.</h2>
+          </div>
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 24px; opacity: {{landTextO}}; pointer-events: {{landPE}}">
+            <span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 4px; color: {{muted}}"><span style="color: #FED233">●</span>  06  LOGONUZ NEREDE DURUR?</span>
+            <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 92px; line-height: 0.9; text-transform: uppercase">Tam <span style="color: #FED233">burada.</span></h2>
+            <label for="bp-company" style="font-size: 17px; color: {{muted}}">Şirketinizin adını yazın, tampona yerleşsin:</label>
+            <input id="bp-company" class="bp-input" type="text" maxlength="14" value="{{company}}" onChange="{{onCompany}}" placeholder="ŞİRKETİNİZ" style="height: 56px; padding: 0 18px; background: {{bg}}; border: 1px solid {{line}}; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-size: 20px; letter-spacing: 2px; text-transform: uppercase">
+            <div style="display: flex; flex-direction: column; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: {{muted}}">
+              <span><span style="color: #FED233">tampon</span>      → [PAKET 2]</span>
+              <span><span style="color: #FED233">yan panel</span>   → [PAKET 1]</span>
+              <span><span style="color: #FED233">kol / tişört</span> → [PAKET 3]</span>
+            </div>
+          </div>
+        </div>
+        <div ref="{{orbitRef}}" onMouseEnter="{{orbitPause}}" onMouseLeave="{{orbitResume}}" style="grid-column: 7 / span 6; position: relative; height: 760px">
+          <div style="position: absolute; left: 50%; top: 50%; width: 720px; height: 720px; margin: -360px 0 0 -360px">
+            <div style="position: absolute; inset: 0; transform: scale({{ringS}}); opacity: {{ringO}}">
+              <svg data-orbit-tick="1" width="720" height="720" viewBox="0 0 720 720" aria-hidden="true" style="position: absolute; inset: 0">
+                <circle cx="360" cy="360" r="352" fill="none" stroke="#FED233" stroke-width="8" stroke-dasharray="1.5 14" opacity="0.7"></circle>
+                <circle cx="360" cy="360" r="290" fill="none" stroke="{{muted}}" stroke-width="1" stroke-dasharray="6 8" opacity="0.5"></circle>
+              </svg>
+              <span style="position: absolute; left: 50%; top: 50%; width: 176px; height: 176px; margin: -88px 0 0 -88px; display: flex; align-items: center; justify-content: center; background: #FED233; color: {{bg}}; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 84px; clip-path: polygon(0 0, 100% 0, 100% 64%, 76% 58%, 62% 100%, 0 100%)">BP</span>
+            </div>
+            <svg width="720" height="720" viewBox="0 0 720 720" aria-hidden="true" style="position: absolute; inset: 0; opacity: {{robotO}}">
+              <rect x="120" y="360" width="480" height="170" fill="{{bg}}" stroke="#FFFFFF" stroke-width="2"></rect>
+              <rect x="430" y="110" width="70" height="250" fill="{{bg}}" stroke="#FFFFFF" stroke-width="2"></rect>
+              <rect x="370" y="90" width="190" height="56" fill="{{bg}}" stroke="#FFFFFF" stroke-width="2"></rect>
+              <rect x="96" y="520" width="528" height="80" fill="{{bg}}" stroke="#FED233" stroke-width="3"></rect>
+              <circle cx="190" cy="628" r="26" fill="{{bg}}" stroke="#FFFFFF" stroke-width="2"></circle>
+              <circle cx="530" cy="628" r="26" fill="{{bg}}" stroke="#FFFFFF" stroke-width="2"></circle>
+              <text x="104" y="512" fill="{{muted}}" style="font-family: 'JetBrains Mono', monospace; font-size: 12px">tampon</text>
+              <text x="128" y="354" fill="{{muted}}" style="font-family: 'JetBrains Mono', monospace; font-size: 12px">yan panel</text>
+              <text x="508" y="104" fill="{{muted}}" style="font-family: 'JetBrains Mono', monospace; font-size: 12px">kol</text>
+            </svg>
+            <sc-for list="{{logos}}" as="lg" hint-placeholder-count="7">
+              <div data-orbit-item="{{lg.i}}" style="position: absolute; left: 0; top: 0; width: 136px; height: 64px; margin: -32px 0 0 -68px; display: flex; align-items: center; justify-content: center; background: {{lg.bgc}}; border: 1px solid {{lg.border}}; color: {{lg.fg}}; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 2px; white-space: nowrap; overflow: hidden">{{lg.label}}</div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Paketler" style="height: 1400px; box-sizing: border-box; display: flex; flex-direction: column; gap: 48px; padding: 128px 64px 64px 112px">
+      <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end">
+        <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 16px">
+          <span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 4px; color: {{muted}}"><span style="color: #FED233">●</span>  07  DESTEĞİNİZ NEREYE GİDİYOR?</span>
+          <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 84px; line-height: 0.92; text-transform: uppercase">Her kuruşun<br><span style="color: #FED233">bir parçası var.</span></h2>
+        </div>
+        <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; height: 44px">
+            <span style="width: 34%; background: #FED233"></span><span style="width: 28%; background: #FFFFFF"></span><span style="width: 22%; background: {{muted}}"></span><span style="width: 16%; background: {{line}}"></span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; font-size: 15px">
+            <span><span style="color: #FED233">■</span> Parça ve motor [₺]</span><span><span style="color: #FFFFFF">■</span> Yarışma kaydı [₺]</span>
+            <span><span style="color: {{muted}}">■</span> Seyahat [₺]</span><span><span style="color: {{line}}">■</span> Atölye [₺]</span>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: {{muted}}">// oranlar ÖRNEK — gerçek bütçeyle değişecek</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+        <sc-for list="{{tiers}}" as="t" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 20px; padding: 32px; min-height: 420px; box-sizing: border-box; background: {{t.bgc}}; color: {{t.fg}}; border: 1px solid {{t.border}}; clip-path: {{t.clip}}; opacity: {{t.o}}; transform: translateY({{t.y}})">
+            <div style="display: flex; justify-content: space-between; align-items: center">
+              <span style="font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 3px">{{t.name}}</span>
+              <button type="button" onClick="{{t.toggle}}" style="height: 36px; padding: 0 12px; background: transparent; border: 1px solid {{t.fg}}; color: {{t.fg}}; font-family: 'JetBrains Mono', monospace; font-size: 12px; cursor: pointer">{{t.toggleLabel}}</button>
+            </div>
+            <sc-if value="{{t.plain}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; flex-direction: column; gap: 16px">
+                <span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 56px; line-height: 1">[TUTAR]</span>
+                <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 17px">
+                  <sc-for list="{{t.items}}" as="it" hint-placeholder-count="3"><li style="padding-top: 12px; border-top: 1px solid {{t.rule}}">{{it}}</li></sc-for>
+                </ul>
+              </div>
+            </sc-if>
+            <sc-if value="{{t.code}}" hint-placeholder-val="{{ false }}">
+              <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 1.8; white-space: pre-wrap">{{t.json}}</pre>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 28px 32px; background: {{surface}}; border: 1px solid {{line}}">
+        <div style="display: flex; align-items: center; gap: 20px">
+          <span style="width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: {{bg}}; border: 1px solid {{line}}; font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; color: {{muted}}">[FOTO]</span>
+          <div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Oswald', sans-serif; font-size: 22px; letter-spacing: 1px">[AD SOYAD]</strong><span style="font-size: 16px; color: {{muted}}">Sponsorluk sorumlusu · [TELEFON]</span></div>
+        </div>
+        <div style="display: flex; gap: 12px">
+          <a href="#" style="display: flex; align-items: center; gap: 10px; padding: 16px 22px; background: #FED233; color: {{bg}}; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 2px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.2 18.6z"></path></svg>WHATSAPP
+          </a>
+          <a href="#" style="display: flex; align-items: center; gap: 10px; padding: 16px 22px; border: 1px solid #FFFFFF; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 2px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>SPONSORLUK DOSYASI
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="İletişim" style="position: relative; height: 2000px">
+      <div style="position: sticky; top: 0; height: 900px; overflow: hidden; background: {{bg}}">
+
+        <div style="position: absolute; inset: 0; padding: 112px 64px 36px 112px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; opacity: {{revO}}; transform: scale({{revS}}); pointer-events: {{revPE}}">
+          <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start">
+            <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 14px; padding: 32px; background: {{surface}}; border: 1px solid {{line}}; font-family: 'JetBrains Mono', monospace; font-size: 19px">
+              <span style="font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; color: {{muted}}"><span style="color: #FED233">●</span>  08  İLETİŞİM · KONSOL</span>
+              <div><span style="color: #FED233">&gt;</span> iletisim()</div>
+              <div style="color: {{muted}}">  e-posta   → <a href="#">[E-POSTA]</a></div>
+              <div style="color: {{muted}}">  whatsapp  → <a href="#">[TELEFON]</a></div>
+              <div style="color: {{muted}}">  instagram → <a href="#">[INSTAGRAM]</a></div>
+              <div style="color: {{muted}}">  youtube   → <a href="#">[YOUTUBE]</a></div>
+              <div><span style="color: #FED233">&gt;</span> <span class="bp-caret" style="display: inline-block; width: 11px; height: 22px; vertical-align: middle; background: #FED233"></span></div>
+            </div>
+            <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
+              <div style="display: flex; align-items: center; gap: 16px">
+                <span style="width: 60px; height: 60px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: {{surface}}; border: 1px solid {{line}}; font-family: 'Oswald', sans-serif; font-size: 11px; color: {{muted}}">[FOTO]</span>
+                <div style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Oswald', sans-serif; font-size: 22px">[AD SOYAD]</strong><span style="font-size: 15px; color: {{muted}}">Sponsorluk sorumlusu</span></div>
+              </div>
+              <a href="#" style="display: flex; align-items: center; justify-content: center; height: 56px; background: #FED233; color: {{bg}}; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 2px">SPONSOR OLUN</a>
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+                <a href="#" style="display: flex; align-items: center; justify-content: center; height: 52px; border: 1px solid #FFFFFF; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 2px">WHATSAPP</a>
+                <a href="#" style="display: flex; align-items: center; justify-content: center; height: 52px; border: 1px solid #FFFFFF; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 2px">TAKIMA KATIL</a>
+              </div>
+              <nav aria-label="Alt menü" style="display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 8px; font-family: 'Oswald', sans-serif; font-size: 15px; letter-spacing: 2px; text-transform: uppercase">
+                <a href="#" style="color: #FFFFFF">FRC nedir</a><a href="#" style="color: #FFFFFF">Robot</a><a href="#" style="color: #FFFFFF">Takım</a><a href="#" style="color: #FFFFFF">Sponsorluk</a>
+              </nav>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 18px">
+            <div style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 236px; line-height: 0.85; letter-spacing: 2px; white-space: nowrap; opacity: {{wordO}}; transform: translateY({{wordY}})">BREAK<span style="color: #FED233">POINT</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; color: {{muted}}; opacity: {{wordO}}"><span>© 2026 BreakPoint · FIRST Robotics Competition Takım 12050</span><span>[OKUL / KURUM] · [ŞEHİR]</span></div>
+          </div>
+        </div>
+
+        <h2 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); margin: 0">Bir sonraki kırılma noktası sizinle.</h2>
+        <sc-for list="{{shards}}" as="sh" hint-placeholder-count="12">
+          <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; clip-path: {{sh.clip}}; transform-origin: {{sh.origin}}; transform: {{sh.t}}; background: linear-gradient(128deg, #FED233 0%, #FED233 38%, #FFE27A 47%, #FED233 56%, #F4C51F 100%); color: {{bg}}">
+            <div style="position: absolute; left: 112px; top: 130px; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 132px; line-height: 0.9; text-transform: uppercase">Bir sonraki<br>kırılma noktası</div>
+            <div style="position: absolute; left: 112px; top: 560px; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 200px; line-height: 0.85">SİZİNLE.</div>
+          </div>
+        </sc-for>
+        <svg width="1440" height="900" viewBox="0 0 1440 900" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; opacity: {{cracksO}}">
+          <sc-for list="{{crackLines}}" as="cr" hint-placeholder-count="16">
+            <polyline points="{{cr.points}}" pathLength="1" fill="none" stroke="{{bg}}" stroke-width="{{cr.w}}" stroke-linejoin="bevel" stroke-dasharray="1" stroke-dashoffset="{{cr.dash}}"></polyline>
+          </sc-for>
+          <circle cx="740" cy="430" r="{{impactR}}" fill="{{bg}}" opacity="0.9"></circle>
+        </svg>
+      </div>
+    </section>
+
+    <footer style="height: 120px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 64px 0 112px; border-top: 1px solid {{line}}; font-size: 14px; color: {{muted}}">
+      <span>© 2026 BreakPoint · FRC 12050</span><span>Gizlilik · [KVKK METNİ]</span>
+    </footer>
+  </div>
+
+  <nav aria-label="Sahneler" style="position: absolute; left: 0; top: 72px; bottom: 0; width: 64px; z-index: 9; pointer-events: none">
+    <svg width="64" height="828" viewBox="0 0 64 828" aria-hidden="true" style="position: absolute; inset: 0">
+      <polyline points="30,30 36,120 26,210 34,300 28,390 37,480 27,570 33,660 29,760" fill="none" stroke="{{line}}" stroke-width="2"></polyline>
+      <polyline points="30,30 36,120 26,210 34,300 28,390 37,480 27,570 33,660 29,760" pathLength="1" fill="none" stroke="#FED233" stroke-width="2" stroke-dasharray="1" stroke-dashoffset="{{spineDash}}"></polyline>
+    </svg>
+    <sc-for list="{{dots}}" as="d" hint-placeholder-count="8">
+      <button type="button" onClick="{{d.go}}" aria-label="{{d.label}}" title="{{d.label}}" style="position: absolute; left: {{d.x}}; top: {{d.y}}; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; border: none; background: transparent; cursor: pointer; pointer-events: auto; display: flex; align-items: center; justify-content: center">
+        <span style="width: {{d.size}}; height: {{d.size}}; border-radius: 50%; box-sizing: border-box; border: 2px solid {{d.ring}}; background: {{d.fill}}"></span>
+      </button>
+    </sc-for>
+  </nav>
+
+  <aside aria-label="İzleme paneli" style="position: absolute; left: 80px; bottom: 16px; z-index: 9; width: 280px; opacity: {{watchO}}; background: {{bg}}; border: 1px solid {{line}}; font-family: 'JetBrains Mono', monospace; font-size: 12px">
+    <div style="display: flex; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid {{line}}; color: {{muted}}"><span><span style="color: #FED233">●</span> izleme</span><span>adım {{sceneLabel}} / 08</span></div>
+    <div style="display: flex; flex-direction: column; padding: 6px 14px 10px">
+      <sc-for list="{{watch}}" as="v" hint-placeholder-count="4">
+        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 3px 0"><span style="color: {{muted}}">{{v.k}}</span><span style="color: {{v.c}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{v.v}}</span></div>
+      </sc-for>
+    </div>
+  </aside>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"siyah":{"editor":"enum","options":["Mürekkep","Kömür","Gece","Grafit"],"default":"Kömür"},"sahne":{"editor":"enum","options":["1 Kırılma","1b Açılmış","2 FRC nedir","3 Parçalar","4 Takım","5 Manifesto","6 Yörünge","6b Robota indi","7 Paketler","8 Cam çatladı","8b Cam düşüyor","8c İletişim"],"default":"1 Kırılma"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.S = [0, 2200, 3100, 6500, 7600, 9200, 11800, 13200];
+    this.TOTAL = 15320;
+    this.targets = { '1 Kırılma': 0, '1b Açılmış': 1250, '2 FRC nedir': 2200, '3 Parçalar': 3900, '4 Takım': 6500, '5 Manifesto': 8100, '6 Yörünge': 9500, '6b Robota indi': 10600, '7 Paketler': 11850, '8 Cam çatladı': 13500, '8b Cam düşüyor': 13860, '8c İletişim': 14300 };
+    this.state = { top: this.targets[props.sahne ?? '1 Kırılma'] ?? 0, company: '', show: [false, false, false] };
+    this.glass = (() => {
+      const cx = 740, cy = 430, N = 11;
+      const radii = [80, 200, 360, 600, 1800];
+      const rnd = (n) => { const v = Math.sin(n * 91.345 + 7.13) * 43758.5453; return v - Math.floor(v); };
+      const ang = [];
+      for (let i = 0; i < N; i++) ang.push((i * 360 / N + (rnd(i) - 0.5) * 18) * Math.PI / 180);
+      const P = (i, j) => {
+        const ii = ((i % N) + N) % N;
+        const r = radii[j] * (j === radii.length - 1 ? 1 : 0.85 + rnd(ii * 7 + j * 13) * 0.3);
+        return [cx + Math.cos(ang[ii]) * r, cy + Math.sin(ang[ii]) * r];
+      };
+      const fmt = (pt) => pt[0].toFixed(1) + ',' + pt[1].toFixed(1);
+      const spokes = [];
+      for (let i = 0; i < N; i++) {
+        const pts = [[cx, cy]];
+        for (let j = 0; j < radii.length; j++) pts.push(P(i, j));
+        spokes.push(pts.map(fmt).join(' '));
+      }
+      const rings = [];
+      for (let j = 0; j < radii.length - 1; j++) {
+        const pts = [];
+        for (let i = 0; i <= N; i++) pts.push(P(i, j));
+        rings.push(pts.map(fmt).join(' '));
+      }
+      const shards = [];
+      for (let i = 0; i < N; i++) {
+        for (let j = 0; j < radii.length; j++) {
+          const poly = j === 0 ? [[cx, cy], P(i, 0), P(i + 1, 0)] : [P(i, j - 1), P(i, j), P(i + 1, j), P(i + 1, j - 1)];
+          let mx = 0, my = 0;
+          poly.forEach((q) => { mx += q[0]; my += q[1]; });
+          mx /= poly.length; my /= poly.length;
+          const dx = mx - cx, dy = my - cy;
+          const len = Math.max(1, Math.sqrt(dx * dx + dy * dy));
+          const seed = i * 17 + j * 5;
+          shards.push({
+            clip: 'polygon(' + poly.map((q) => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(', ') + ')',
+            origin: mx.toFixed(1) + 'px ' + my.toFixed(1) + 'px',
+            nx: dx / len, ny: dy / len,
+            delay: 0.4 + j * 0.06 + rnd(seed) * 0.08,
+            fall: 1150 + rnd(seed + 1) * 400,
+            drift: dx * 0.12 + (rnd(seed + 2) - 0.5) * 120,
+            spin: (rnd(seed + 3) - 0.5) * 90
+          });
+        }
+      }
+      return { spokes: spokes, rings: rings, shards: shards };
+    })();
+    this.el = null;
+    this.raf = 0;
+    this.angle = 0;
+    this.orbitEl = null;
+    this.orbitPaused = false;
+    this.loopRaf = 0;
+    this.setRef = (el) => {
+      if (el && el !== this.el) {
+        this.el = el;
+        el.scrollTop = this.state.top;
+      }
+    };
+    this.handleScroll = (ev) => {
+      const el = ev && ev.currentTarget;
+      if (el) this.el = el;
+      if (this.raf) return;
+      this.raf = requestAnimationFrame(() => {
+        this.raf = 0;
+        if (this.el) this.setState({ top: this.el.scrollTop });
+      });
+    };
+    this.setOrbitRef = (el) => { if (el) { this.orbitEl = el; this.applyOrbit(); } };
+    this.orbitPause = () => { this.orbitPaused = true; };
+    this.orbitResume = () => { this.orbitPaused = false; };
+    this.onCompany = (ev) => this.setState({ company: String(ev.target.value).slice(0, 14) });
+    this.jump = (y) => {
+      if (this.el) {
+        if (this.el.scrollTo) this.el.scrollTo({ top: y, behavior: 'smooth' });
+        else this.el.scrollTop = y;
+      }
+    };
+  }
+  landOf(top) {
+    const cl = (x) => Math.max(0, Math.min(1, x));
+    const x = cl(((top - 9200) / 1700 - 0.4) / 0.35);
+    return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  }
+  componentDidMount() {
+    const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.applyOrbit();
+    if (reduce) return;
+    let last = 0;
+    const loop = (t) => {
+      if (last && !this.orbitPaused) this.angle += (t - last) * 360 / 48000;
+      last = t;
+      this.applyOrbit();
+      this.loopRaf = requestAnimationFrame(loop);
+    };
+    this.loopRaf = requestAnimationFrame(loop);
+  }
+  applyOrbit() {
+    if ((!this.orbitEl || !this.orbitEl.isConnected) && typeof document !== 'undefined') {
+      const t = document.querySelector('[data-orbit-tick]');
+      if (t) this.orbitEl = t.parentElement.parentElement.parentElement;
+    }
+    const root = this.orbitEl;
+    if (!root) return;
+    const land = this.landOf(this.el ? this.el.scrollTop : this.state.top);
+    const targets = [[200, 560], [520, 560], [240, 445], [480, 445], [465, 235], [465, 118], [360, 560]];
+    const items = root.querySelectorAll('[data-orbit-item]');
+    items.forEach((item) => {
+      const i = Number(item.getAttribute('data-orbit-item'));
+      const a = (this.angle + i * 360 / 7 - 90) * Math.PI / 180;
+      const ox = 360 + 290 * Math.cos(a);
+      const oy = 360 + 290 * Math.sin(a);
+      const t = targets[i] || [360, 360];
+      const x = ox + (t[0] - ox) * land;
+      const y = oy + (t[1] - oy) * land;
+      const s = i === 6 ? 1 + land * 0.2 : 1 - land * 0.25;
+      item.style.transform = 'translate(' + x + 'px, ' + y + 'px) scale(' + s + ')';
+    });
+    const tick = root.querySelector('[data-orbit-tick]');
+    if (tick) tick.style.transform = 'rotate(' + (-this.angle * 0.4) + 'deg)';
+  }
+  componentDidUpdate(prev) {
+    this.applyOrbit();
+    if (prev.sahne !== this.props.sahne && this.el) {
+      const t = this.targets[this.props.sahne] ?? 0;
+      this.el.scrollTop = t;
+      this.setState({ top: t });
+    }
+  }
+  componentWillUnmount() {
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.loopRaf) cancelAnimationFrame(this.loopRaf);
+  }
+  renderVals() {
+    const palettes = {
+      'Mürekkep': { bg: '#0A0A0B', surface: '#161618', line: '#2A2A2D', muted: '#A3A3A8' },
+      'Kömür': { bg: '#12100C', surface: '#1D1A15', line: '#332E25', muted: '#ABA597' },
+      'Gece': { bg: '#0A0D12', surface: '#131821', line: '#252C38', muted: '#9EA6B3' },
+      'Grafit': { bg: '#1C1C1E', surface: '#27272A', line: '#3A3A3E', muted: '#AEAEB3' }
+    };
+    const c = palettes[this.props.siyah ?? 'Kömür'] ?? palettes['Kömür'];
+    const Y = '#FED233', W = '#FFFFFF';
+    const top = this.state.top;
+    const S = this.S;
+    const cl = (x) => Math.max(0, Math.min(1, x));
+    const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+    const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+    const rise = (a, d) => ({ o: a, y: ((1 - a) * d) + 'px' });
+
+    let scene = 0;
+    for (let i = 0; i < S.length; i++) if (top >= S[i] - 450) scene = i;
+    const company = this.state.company.trim().toUpperCase();
+
+    // 1 hero
+    const p1 = cl(top / 1300);
+    const e1 = ease(cl((p1 - 0.1) / 0.75));
+
+    // 2 frc
+    const p2 = cl((top - S[1] + 700) / 800);
+    const facts = [
+      { n: '[N] HF', t: 'Robotu sıfırdan tasarlayıp üretmek için verilen süre' },
+      { n: '[N] KG', t: 'Robotun ağırlık sınırı — her gram hesaplanır' },
+      { n: '[N]+', t: 'Dünya genelinde yarışan takım sayısı' }
+    ].map((f, i) => ({ ...f, ...rise(easeOut(cl((p2 - 0.15 - i * 0.12) / 0.4)), 60) }));
+    const s2 = rise(easeOut(cl(p2 / 0.45)), 50);
+
+    // 3 robot parts (G sahne 2)
+    const p3 = cl((top - S[2]) / 2500);
+    const k = p3 < 0.08 ? -1 : Math.min(3, Math.floor((p3 - 0.08) / 0.23));
+    const partData = [
+      { no: '01', name: 'Şasi', sub: '[SÜRÜŞ SİSTEMİ, MALZEME, AĞIRLIK]', x: '32%', y: '74%' },
+      { no: '02', name: 'Mekanizma', sub: '[OYUN PARÇASIYLA NE YAPIYOR]', x: '60%', y: '28%' },
+      { no: '03', name: 'Elektronik', sub: '[KONTROLCÜ, MOTORLAR, SENSÖRLER]', x: '46%', y: '52%' },
+      { no: '04', name: 'Yazılım', sub: '[OTONOM, GÖRÜNTÜ İŞLEME]', x: '72%', y: '60%' }
+    ];
+    const cur = k >= 0 ? partData[k] : null;
+    const parts = partData.map((p, i) => ({ x: p.x, y: p.y, dotFill: i === k ? Y : c.bg, pulseO: i === k ? 0.8 : 0, bar: i <= k ? Y : c.line }));
+
+    // 4 team
+    const p4 = cl((top - S[3] + 700) / 900);
+    const roles = ['kaptan', 'mekanik[0]', 'mekanik[1]', 'yazilim[0]', 'yazilim[1]', 'elektronik[0]', 'elektronik[1]', 'medya[0]', 'sponsorluk[0]', 'mentor[0]'];
+    const team = roles.map((r, i) => ({ k: r, ...rise(easeOut(cl((p4 - 0.1 - (i % 5) * 0.06 - Math.floor(i / 5) * 0.12) / 0.35)), 70) }));
+
+    // 5 manifesto
+    const words = 'Her sistemin bir kırılma noktası vardır. Biz onu buluruz.'.split(' ');
+    const p5 = cl((top - S[4]) / 700);
+    const wlist = words.map((t, i) => ({ t: t, c: i === 3 || i === 4 ? Y : W, o: 0.14 + 0.86 * cl(p5 * (words.length + 2) - i - 0.5) }));
+
+    // 6 orbit -> robot
+    const p6 = cl((top - S[5]) / 1700);
+    const land = this.landOf(top);
+    const labels = ['[LOGO]', '[LOGO]', '[LOGO]', '[LOGO]', '[LOGO]', '[LOGO]', company || '+ SİZ'];
+    const logos = labels.map((l, i) => ({ i: i, label: l, bgc: i === 6 ? Y : c.bg, fg: i === 6 ? c.bg : c.muted, border: i === 6 ? Y : c.line }));
+
+    // 7 packages
+    const p7 = cl((top - S[6] + 700) / 900);
+    const tierData = [
+      { name: '[PAKET 1]', items: ['Yan panelde logo', '[KARŞILIK 2]', 'Teşekkür paylaşımı'], key: 'yan panel' },
+      { name: '[PAKET 2] · ÖNERİLEN', items: ['Tamponda logo', 'Tişörtte logo', '[KARŞILIK 3]', 'Etkinlik daveti'], key: 'tampon' },
+      { name: '[PAKET 3]', items: ['Kol / tişört', '[KARŞILIK 2]', '[KARŞILIK 3]'], key: 'kol' }
+    ];
+    const tiers = tierData.map((t, i) => {
+      const hot = i === 1;
+      const show = this.state.show[i];
+      const a = easeOut(cl((p7 - 0.1 - i * 0.12) / 0.45));
+      return {
+        name: t.name, items: t.items,
+        plain: !show, code: show,
+        toggleLabel: show ? 'düz metin' : '</> kaynak',
+        toggle: () => { const n = this.state.show.slice(); n[i] = !n[i]; this.setState({ show: n }); },
+        json: '{\n  "paket": "' + t.name.replace(' · ÖNERİLEN', '') + '",\n  "tutar": "[TUTAR]",\n  "logo_yeri": "' + t.key + '",\n  "karsilik": [\n' + t.items.map((x) => '    "' + x + '"').join(',\n') + '\n  ]\n}',
+        bgc: hot ? Y : c.surface, fg: hot ? c.bg : W, border: hot ? Y : c.line, rule: hot ? c.bg : c.line,
+        clip: hot ? 'polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%)' : 'none',
+        o: a, y: ((1 - a) * 100) + 'px'
+      };
+    });
+
+    // 8 cam kırılır, parçalar düşer, arkadan iletişim + BREAKPOINT
+    const p8 = cl((top - S[7]) / 1100);
+    const G = this.glass;
+    const crackLines = G.spokes.map((sp, i) => ({ points: sp, w: 3, dash: 1 - ease(cl((p8 - 0.06 - i * 0.008) / 0.2)) }))
+      .concat(G.rings.map((rg, j) => ({ points: rg, w: 2, dash: 1 - ease(cl((p8 - 0.14 - j * 0.04) / 0.16)) })));
+    const pop = easeOut(cl((p8 - 0.34) / 0.06));
+    const shards = G.shards.map((sh) => {
+      const f = cl((p8 - sh.delay) / 0.3);
+      const ff = f * f;
+      const tx = sh.nx * pop * 5 + sh.drift * f;
+      const ty = sh.ny * pop * 5 + ff * sh.fall;
+      return { clip: sh.clip, origin: sh.origin, t: 'translate(' + tx + 'px, ' + ty + 'px) rotate(' + (sh.spin * ff) + 'deg)' };
+    });
+    const rev = easeOut(cl((p8 - 0.42) / 0.3));
+    const word = easeOut(cl((p8 - 0.68) / 0.24));
+
+    // spine + watch
+    const labelsS = ['Giriş', 'FRC nedir', 'Robot', 'Takım', 'Manifesto', 'Yörünge', 'Paketler', 'İletişim'];
+    const spineY = [30, 120, 210, 300, 390, 480, 570, 660];
+    const spineX = [30, 36, 26, 34, 28, 37, 27, 33];
+    const dots = labelsS.map((l, i) => ({
+      label: l, x: spineX[i] + 'px', y: spineY[i] + 'px',
+      size: i === scene ? '16px' : '10px',
+      ring: i <= scene ? Y : c.muted,
+      fill: i < scene ? Y : i === scene ? c.bg : c.bg,
+      go: () => this.jump(S[i] + (i === 4 ? 500 : 0))
+    }));
+    const watchSets = [
+      [['takim', '"BreakPoint"', W], ['numara', '12050', Y], ['sezon', '[YIL]', Y], ['sehir', '"[ŞEHİR]"', W]],
+      [['yarisma', '"FRC"', W], ['sure', '[N] hafta', Y], ['hedef', '"[TURNUVA]"', W], ['yarismaya', '[N] gün', Y]],
+      [['parca', k >= 0 ? '"' + cur.name + '"' : 'null', W], ['indeks', k >= 0 ? String(k) : '-', Y], ['kamera', k >= 0 ? 'zoom 1.8x' : 'genel', W], ['sistem', '4', Y]],
+      [['ogrenci', '[N]', Y], ['mentor', '[N]', Y], ['ekip', '4', Y], ['basvuru', '"[DURUM]"', W]],
+      [['not', '"manifesto"', W], ['kirilma', 'bulundu', Y], ['sonraki', 'yörünge', W], ['sponsor', '[N]', Y]],
+      [['sponsor', '[N]', Y], ['yer', land > 0.5 ? '"tampon"' : '"yörünge"', W], ['marka', company ? '"' + company + '"' : 'undefined', company ? Y : c.muted], ['slot', '+1', Y]],
+      [['butce', '%[..] hazır', Y], ['hedef', '₺[…]', W], ['eksik', '₺[…]', Y], ['iletisim', '"[AD]"', W]],
+      [['cam', p8 < 0.08 ? '"sağlam"' : p8 < 0.4 ? '"çatladı"' : '"kırıldı"', p8 < 0.08 ? W : Y], ['parca', String(G.shards.length), Y], ['sonraki', '"kırılma noktası"', W], ['iletisim', rev > 0.5 ? 'hazır' : 'yükleniyor', Y]]
+    ];
+    const watch = watchSets[scene].map((v) => ({ k: v[0], v: v[1], c: v[2] }));
+
+    return {
+      ...c,
+      scrollRef: this.setRef,
+      onScroll: this.handleScroll,
+      orbitRef: this.setOrbitRef,
+      orbitPause: this.orbitPause,
+      orbitResume: this.orbitResume,
+      sceneLabel: '0' + (scene + 1),
+      spineDash: 1 - cl(top / (this.TOTAL - 900)),
+      dots: dots,
+      watch: watch,
+
+      crackO: (0.55 + 0.45 * cl(p1 / 0.1)) * (1 - cl((p1 - 0.14) / 0.12)),
+      leftT: 'translate(' + (-e1 * 780) + 'px, ' + (-e1 * 140) + 'px) rotate(' + (-e1 * 9) + 'deg)',
+      rightT: 'translate(' + (e1 * 780) + 'px, ' + (e1 * 160) + 'px) rotate(' + (e1 * 8) + 'deg)',
+      photoS: 1.35 - 0.35 * e1,
+      photoO: 0.3 + 0.7 * e1,
+      revealO: cl((p1 - 0.72) / 0.18),
+      hintO: 1 - cl(p1 / 0.08),
+
+      s2O: s2.o, s2Y: s2.y, facts: facts,
+
+      parts: parts,
+      camScale: k >= 0 ? 1.8 : 1,
+      camOrigin: k >= 0 ? cur.x + ' ' + cur.y : '50% 50%',
+      partIdx: k >= 0 ? k : 'null',
+      partNo: k >= 0 ? cur.no : '00',
+      partName: k >= 0 ? cur.name : '[ROBOT ADI]',
+      partSub: k >= 0 ? cur.sub : 'Dört sistem, tek robot. Kaydırdıkça kamera parçalara yaklaşır.',
+
+      team: team,
+      words: wlist,
+
+      logos: logos,
+      company: this.state.company,
+      onCompany: this.onCompany,
+      ringS: 0.7 + 0.3 * easeOut(cl(p6 / 0.25)),
+      ringO: cl(p6 / 0.18) * (1 - land),
+      robotO: land,
+      orbitTextO: 1 - cl((land - 0.2) / 0.3),
+      landTextO: cl((land - 0.5) / 0.3),
+      landPE: land > 0.6 ? 'auto' : 'none',
+
+      tiers: tiers,
+
+      crackLines: crackLines,
+      cracksO: 1 - cl((p8 - 0.38) / 0.06),
+      impactR: 4 + 6 * cl(p8 / 0.08),
+      shards: shards,
+      revO: rev,
+      revS: 1.06 - 0.06 * rev,
+      revPE: rev > 0.8 ? 'auto' : 'none',
+      wordO: word,
+      wordY: ((1 - word) * 80) + 'px',
+      watchO: scene === 7 ? 1 - rev : 1,
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Yön D — Mobil</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Roboto+Condensed:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#12100C;font-synthesis:none}
+a{color:#FED233;text-decoration:none}a:hover{color:#FFFFFF}
+</style>
+</helmet>
+<div style="width: 390px; height: 3000px; display: flex; flex-direction: column; background: {{bg}}; color: #FFFFFF; font-family: 'Roboto Condensed', 'Arial Narrow', sans-serif; overflow: hidden">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid {{line}}; position: relative; z-index: 3; background: {{bg}}">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; color: #FFFFFF">
+      <span style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #FED233; color: {{bg}}; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 22px; clip-path: polygon(0 0, 100% 0, 100% 64%, 76% 58%, 62% 100%, 0 100%)">BP</span>
+      <span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 18px; letter-spacing: 2px">BREAKPOINT</span>
+    </a>
+    <button type="button" aria-label="Menüyü aç" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid {{line}}; color: #FFFFFF; cursor: pointer">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg>
+    </button>
+  </header>
+
+  <section aria-label="Giriş" style="position: relative; height: 640px; flex-shrink: 0; overflow: hidden; background: #FED233">
+    <div style="position: absolute; inset: 0; background: {{bg}}; clip-path: polygon(0 0, 100% 0, 100% 44%, 80% 49%, 63% 43%, 44% 52%, 27% 46%, 12% 51%, 0 47%); transform-origin: 50% 0%; transform: translateY(-6px) rotate(-0.8deg)">
+      <div style="position: absolute; left: 20px; top: 40px; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; color: {{muted}}"><span style="color: #FED233">●</span>  01  FRC · TAKIM 12050</div>
+      <h1 style="margin: 0; position: absolute; left: 20px; top: 140px; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 120px; line-height: 1">BREAK<span style="position: absolute; left: -9999px">POINT</span></h1>
+    </div>
+    <div style="position: absolute; inset: 0; background: {{bg}}; clip-path: polygon(0 47%, 12% 51%, 27% 46%, 44% 52%, 63% 43%, 80% 49%, 100% 44%, 100% 100%, 0 100%); transform-origin: 50% 100%; transform: translateY(8px) rotate(0.6deg)">
+      <div aria-hidden="true" style="position: absolute; right: 20px; top: 345px; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 120px; line-height: 1; color: #FED233">POINT</div>
+      <div style="position: absolute; left: 20px; right: 20px; bottom: 32px; display: flex; flex-direction: column; gap: 20px">
+        <p style="margin: 0; font-size: 18px; line-height: 1.5; color: {{muted}}">[TAKIMI TEK CÜMLEDE ANLATAN SLOGAN]</p>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; height: 56px; background: #FED233; color: {{bg}}; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 2px">SPONSOR OL</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Robot" style="display: flex; flex-direction: column; gap: 24px; padding: 48px 20px 80px; background: #FED233; color: {{bg}}">
+    <span style="font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px">●  02  ROBOTUMUZ</span>
+    <div style="height: 260px; display: flex; align-items: center; justify-content: center; background: {{bg}}; color: #FED233; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; clip-path: polygon(0 0, 90% 0, 100% 12%, 100% 100%, 10% 100%, 0 88%)">[ROBOT FOTOĞRAFI]</div>
+    <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 56px; line-height: 0.95">[ROBOT ADI]</h2>
+    <dl style="margin: 0; display: flex; flex-direction: column; font-size: 16px">
+      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-top: 2px solid {{bg}}"><dt>Sezon</dt><dd style="margin: 0; font-family: 'Oswald', sans-serif; font-weight: 600">[YIL]</dd></div>
+      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-top: 1px solid {{bg}}"><dt>Sürüş</dt><dd style="margin: 0; font-family: 'Oswald', sans-serif; font-weight: 600">[—]</dd></div>
+      <div style="display: flex; justify-content: space-between; padding: 14px 0; border-top: 1px solid {{bg}}; border-bottom: 2px solid {{bg}}"><dt>Yazılım</dt><dd style="margin: 0; font-family: 'Oswald', sans-serif; font-weight: 600">[DİL]</dd></div>
+    </dl>
+  </section>
+
+  <section aria-label="Manifesto" style="margin-top: -32px; padding: 96px 20px 72px; background: {{bg}}; clip-path: polygon(0 24px, 22% 4px, 41% 30px, 63% 0, 82% 26px, 100% 8px, 100% 100%, 0 100%)">
+    <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); row-gap: 6px; font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 32px; line-height: 1.15; text-transform: uppercase">
+      <span style="font-size: 12px; line-height: 37px; color: {{line}}">14</span><span>Her sistemin</span>
+      <span style="font-size: 12px; line-height: 37px; color: #FED233">● 15</span><span style="color: #FED233">bir kırılma noktası vardır.</span>
+      <span style="font-size: 12px; line-height: 37px; color: {{line}}">16</span><span>Biz onu bulur, inceler</span>
+      <span style="font-size: 12px; line-height: 37px; color: {{line}}">17</span><span>ve daha güçlüsünü inşa ederiz.</span>
+    </div>
+  </section>
+
+  <section aria-label="Sponsorluk" style="display: flex; flex-direction: column; gap: 24px; padding: 72px 20px; background: {{surface}}; border-top: 1px solid {{line}}">
+    <span style="font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; color: {{muted}}"><span style="color: #FED233">●</span>  03  SPONSORLUK</span>
+    <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 52px; line-height: 0.92">MARKANIZ PİSTTE, PİTTE VE EKRANDA.</h2>
+    <p style="margin: 0; font-size: 17px; line-height: 1.6; color: {{muted}}">[SPONSORLUĞUN NEYİ MÜMKÜN KILDIĞI]</p>
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px; background: {{bg}}; border: 1px solid {{line}}"><span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 3px; color: {{muted}}">[PAKET 1]</span><span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 28px">[TUTAR]</span></div>
+      <div style="display: flex; flex-direction: column; gap: 12px; padding: 24px 20px; background: #FED233; color: {{bg}}; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%)">
+        <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 3px">[PAKET 2] · ÖNERİLEN</span><span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 28px">[TUTAR]</span></div>
+        <span style="font-size: 16px">Robot üzerinde logo · [KARŞILIK 2] · [KARŞILIK 3]</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px; background: {{bg}}; border: 1px solid {{line}}"><span style="font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 3px; color: {{muted}}">[PAKET 3]</span><span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 28px">[TUTAR]</span></div>
+    </div>
+    <a href="#" style="display: flex; align-items: center; justify-content: center; height: 56px; background: #FED233; color: {{bg}}; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 2px">SPONSORLUK DOSYASI (PDF)</a>
+  </section>
+
+  <section aria-label="Takım" style="display: flex; flex-direction: column; gap: 24px; padding: 72px 20px">
+    <span style="font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; color: {{muted}}"><span style="color: #FED233">●</span>  04  TAKIM</span>
+    <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 52px; line-height: 0.92">DÖRT EKİP, TEK ROBOT.</h2>
+    <div style="display: flex; flex-direction: column">
+      <a href="#" style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid {{line}}; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 24px; text-transform: uppercase"><span style="width: 36px; font-size: 13px; font-weight: 400; color: {{muted}}">01</span>Mekanik</a>
+      <a href="#" style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid {{line}}; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 24px; text-transform: uppercase"><span style="width: 36px; font-size: 13px; font-weight: 400; color: #FED233">● 02</span>Yazılım</a>
+      <a href="#" style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid {{line}}; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 24px; text-transform: uppercase"><span style="width: 36px; font-size: 13px; font-weight: 400; color: {{muted}}">03</span>Elektronik</a>
+      <a href="#" style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid {{line}}; border-bottom: 1px solid {{line}}; color: #FFFFFF; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 24px; text-transform: uppercase"><span style="width: 36px; font-size: 13px; font-weight: 400; color: {{muted}}">04</span>Medya &amp; Sponsorluk</a>
+    </div>
+  </section>
+
+  <section aria-label="Sponsorlar" style="display: flex; flex-direction: column; gap: 32px; padding: 96px 20px 64px; background: #FED233; color: {{bg}}; clip-path: polygon(0 14px, 20% 36px, 42% 6px, 61% 30px, 80% 0, 100% 22px, 100% 100%, 0 100%)">
+    <h2 style="margin: 0; font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 60px; line-height: 0.9">BİR SONRAKİ KIRILMA NOKTASI SİZİNLE.</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px solid {{bg}}">
+      <div style="height: 88px; display: flex; align-items: center; justify-content: center; border-right: 1px solid {{bg}}; border-bottom: 1px solid {{bg}}; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px">[LOGO]</div>
+      <div style="height: 88px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid {{bg}}; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px">[LOGO]</div>
+      <div style="height: 88px; display: flex; align-items: center; justify-content: center; border-right: 1px solid {{bg}}; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px">[LOGO]</div>
+      <a href="#" style="height: 88px; display: flex; align-items: center; justify-content: center; background: {{bg}}; color: #FED233; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 3px">+ SİZ</a>
+    </div>
+  </section>
+
+  <footer style="flex-grow: 1; display: flex; flex-direction: column; gap: 32px; padding: 56px 20px 32px">
+    <span style="font-family: 'Norwester', 'Oswald', sans-serif; font-weight: 600; font-size: 56px; line-height: 0.9">BREAK<span style="color: #FED233">POINT</span></span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; font-size: 16px">
+      <nav aria-label="Alt menü" style="display: flex; flex-direction: column; gap: 14px"><a href="#" style="color: #FFFFFF">Robot</a><a href="#" style="color: #FFFFFF">Takım</a><a href="#" style="color: #FFFFFF">Sponsorluk</a></nav>
+      <div style="display: flex; flex-direction: column; gap: 14px"><a href="#">[E-POSTA]</a><a href="#">[INSTAGRAM]</a><a href="#">[YOUTUBE]</a></div>
+    </div>
+    <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid {{line}}; font-size: 13px; color: {{muted}}">© 2026 BreakPoint · FRC 12050</div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"siyah":{"editor":"enum","options":["Mürekkep","Kömür","Gece","Grafit"],"default":"Kömür"},"$preview":{"width":390,"height":3000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const palettes = {
+      'Mürekkep': { bg: '#0A0A0B', surface: '#161618', line: '#2A2A2D', muted: '#A3A3A8' },
+      'Kömür': { bg: '#12100C', surface: '#1D1A15', line: '#332E25', muted: '#ABA597' },
+      'Gece': { bg: '#0A0D12', surface: '#131821', line: '#252C38', muted: '#9EA6B3' },
+      'Grafit': { bg: '#1C1C1E', surface: '#27272A', line: '#3A3A3E', muted: '#AEAEB3' }
+    };
+    return palettes[this.props.siyah ?? 'Kömür'] ?? palettes['Kömür'];
+  }
+}
+</script>
+</body>
+</html>
