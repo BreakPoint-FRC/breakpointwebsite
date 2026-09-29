@@ -4,6 +4,7 @@ import { MobileBar } from "@/components/layout/MobileBar";
 import { SceneTracker } from "@/components/layout/SceneTracker";
 import { Spine } from "@/components/layout/Spine";
 import { WatchPanel } from "@/components/layout/WatchPanel";
+import { FitLeading } from "@/components/motion/FitLeading";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { FrcFacts } from "@/components/scenes/FrcFacts";
 import { GlassFinale } from "@/components/scenes/GlassFinale";
@@ -40,6 +41,7 @@ export default function Home() {
       <LegalBar />
       <MobileBar />
       <SceneTracker />
+      <FitLeading />
     </>
   );
 }

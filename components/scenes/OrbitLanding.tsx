@@ -205,7 +205,7 @@ export function OrbitLanding() {
           <div className="relative hidden h-520 lg:col-span-5 lg:block">
             <div data-orbit-text className="absolute inset-0 flex flex-col justify-center gap-28 motion-reduce:hidden">
               <SectionLabel text={orbit.label} />
-              <h2 className="m-0 font-display font-semibold uppercase fs-92 leading-[0.9]">
+              <h2 data-fit-leading className="m-0 font-display font-semibold uppercase fs-92 leading-display">
                 {orbit.title}
                 <br />
                 <span className="text-bp-yellow">{orbit.titleAccent}</span>
@@ -218,7 +218,7 @@ export function OrbitLanding() {
               className="pointer-events-none absolute inset-0 flex flex-col justify-center gap-24 opacity-0 motion-reduce:pointer-events-auto motion-reduce:opacity-100"
             >
               <SectionLabel text={orbit.landLabel} />
-              <h2 className="m-0 font-display font-semibold uppercase fs-92 leading-[0.9]">
+              <h2 data-fit-leading className="m-0 font-display font-semibold uppercase fs-92 leading-display">
                 {orbit.landTitle} <span className="text-bp-yellow">{orbit.landTitleAccent}</span>
               </h2>
               <label htmlFor="bp-company" className="text-bp-muted fs-17">
@@ -233,13 +233,13 @@ export function OrbitLanding() {
           <div className="grid lg:hidden">
             <div data-orbit-text className="flex flex-col gap-12 [grid-area:1/1] motion-reduce:hidden">
               <SectionLabel text={orbit.label} />
-              <h2 className="m-0 font-display font-semibold uppercase fs-40 leading-[0.9]">
+              <h2 data-fit-leading className="m-0 font-display font-semibold uppercase fs-40 leading-display">
                 {orbit.title} <span className="text-bp-yellow">{orbit.titleAccent}</span> {orbit.titleEnd}
               </h2>
             </div>
             <div data-land-text className="pointer-events-none flex flex-col gap-12 opacity-0 [grid-area:1/1] motion-reduce:pointer-events-auto motion-reduce:opacity-100">
               <SectionLabel text={orbit.landLabel} />
-              <h2 className="m-0 font-display font-semibold uppercase fs-52 leading-[0.9]">
+              <h2 data-fit-leading className="m-0 font-display font-semibold uppercase fs-52 leading-display">
                 {orbit.landTitle} <span className="text-bp-yellow">{orbit.landTitleAccent}</span>
               </h2>
             </div>

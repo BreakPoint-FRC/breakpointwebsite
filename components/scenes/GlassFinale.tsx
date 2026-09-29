@@ -211,7 +211,7 @@ export function GlassFinale() {
       <div ref={root}>
         {/* Reduced-motion: cam kırılmaz, başlık durağan sarı panelde. */}
         <div aria-hidden="true" className="hidden bg-glass px-16 py-56 text-bp-black motion-reduce:block lg:px-112 lg:py-96">
-          <p className="m-0 font-display font-semibold uppercase fs-44 leading-[0.9] lg:fs-132">
+          <p data-fit-leading className="m-0 font-display font-semibold uppercase fs-44 leading-[0.9] lg:fs-132">
             {contact.glassLine1}
             <br />
             {contact.glassLine2}

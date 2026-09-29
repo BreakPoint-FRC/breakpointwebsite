@@ -48,6 +48,9 @@
   --font-label: var(--font-oswald), "Oswald", sans-serif;
   --font-body: var(--font-roboto-condensed), "Roboto Condensed", "Arial Narrow", sans-serif;
   --font-code: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
+  /* Çok satırlı büyük harf başlıklar. Oswald: büyük harf 0.81em, İ/Ü/Ğ noktası 1.05em → 1.0 altı
+     satır aralığında nokta üst satırın tabanına girer. Norwester gelince yeniden ölç. */
+  --leading-display: 1.1;
 }
 
 @media (min-width: 64rem) {

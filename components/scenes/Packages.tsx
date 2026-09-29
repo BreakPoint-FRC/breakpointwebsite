@@ -50,7 +50,7 @@ export function Packages() {
           <div className="flex flex-col gap-16 lg:col-span-7">
             <SectionLabel text={packages.labelMobile} className="lg:hidden" />
             <SectionLabel text={packages.label} className="hidden lg:inline" />
-            <h2 className="sr-only m-0 font-display font-semibold uppercase lg:not-sr-only lg:fs-84 lg:leading-[0.92]">
+            <h2 data-fit-leading className="sr-only m-0 font-display font-semibold uppercase lg:not-sr-only lg:fs-84 lg:leading-display">
               {packages.title}
               <br />
               <span className="text-bp-yellow">{packages.titleAccent}</span>

@@ -48,7 +48,7 @@ export function FrcFacts() {
       >
         <div data-intro className="flex flex-col gap-20 lg:col-span-5 lg:gap-24">
           <SectionLabel text={frc.label} />
-          <h2 className="m-0 font-display font-semibold uppercase fs-44 leading-[0.95] lg:fs-76 lg:leading-[0.92]">
+          <h2 data-fit-leading className="m-0 font-display font-semibold uppercase fs-44 leading-display lg:fs-76">
             {frc.title} <br className="hidden lg:block" />
             <span className="text-bp-yellow">{frc.titleAccent}</span>
           </h2>

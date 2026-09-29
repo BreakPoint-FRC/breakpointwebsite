@@ -67,7 +67,7 @@ export function Manifesto() {
           <span className="whitespace-pre font-code text-bp-muted fs-13 lg:fs-15">
             <span className="text-bp-yellow">●</span> {manifesto.label}
           </span>
-          <p className="m-0 flex flex-wrap gap-x-12 gap-y-4 font-label font-semibold uppercase fs-48 leading-[1.02] lg:gap-x-28 lg:fs-116">
+          <p data-fit-leading className="m-0 flex flex-wrap gap-x-12 gap-y-4 font-label font-semibold uppercase fs-48 leading-display lg:gap-x-28 lg:fs-116">
             {words.map((w, i) => (
               <span
                 key={i}
