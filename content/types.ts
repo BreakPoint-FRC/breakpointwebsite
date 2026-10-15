@@ -11,6 +11,8 @@ export interface SiteInfo {
 
 export interface Features {
   qualitySelector: boolean;
+  /** Takım bölümündeki kişi kartları (kimlik kartları). Kapalıyken yalnız başlık ve metin görünür. */
+  teamCards: boolean;
 }
 
 export interface HeroContent {

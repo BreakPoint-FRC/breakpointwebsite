@@ -121,8 +121,11 @@ try {
     const { context, page } = await open(browser, { viewport: { width: 1440, height: 900 } }, base + "/");
     const brand = await page.locator(".brand-name").innerText();
     check("marka büyük harfle BREAKPOINT", brand.trim() === "BREAKPOINT", JSON.stringify(brand));
-    const strip = await page.locator(".idc .strip").first().innerText();
-    check("kimlik bandı BREAKPOINT 12050", strip.trim() === "BREAKPOINT 12050", JSON.stringify(strip));
+    // Kişi kartları `features.teamCards` ile kapalıysa kimlik bandı sınanmaz.
+    if ((await page.locator(".idc").count()) > 0) {
+      const strip = await page.locator(".idc .strip").first().innerText();
+      check("kimlik bandı BREAKPOINT 12050", strip.trim() === "BREAKPOINT 12050", JSON.stringify(strip));
+    }
     await context.close();
   }
 

@@ -12,6 +12,7 @@ export const site: SiteInfo = {
 
 export const features: Features = {
   qualitySelector: true,
+  teamCards: false,
 };
 
 export const hero: HeroContent = {

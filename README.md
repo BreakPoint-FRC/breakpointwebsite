@@ -16,7 +16,7 @@ Sayfa metinleri `content/*.ts` içindedir. `[KÖŞELİ PARANTEZ]` olan her değe
 | `content/nav.ts` | üst menü bağlantıları |
 | `content/frc.ts` | FRC nedir metni ve üç adım |
 | `content/robotParts.ts` | dört robot parçası, robot fotoğrafı, çizim ölçü etiketi |
-| `content/team.ts` | takım kartları (ad, alt takım, fotoğraf) |
+| `content/team.ts` | takım kartları (ad, alt takım, fotoğraf); kartlar `features.teamCards` bayrağıyla açılıp kapanır (şu an kapalı) |
 | `content/sponsorTiers.ts` | sponsorluk paketleri |
 | `content/contact.ts` | iletişim alanları (isteğe bağlı `href`) |
 
