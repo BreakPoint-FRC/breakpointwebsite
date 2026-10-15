@@ -1,0 +1,81 @@
+PASS masaustu-1440: yatay taşma yok :: scrollWidth=1440 clientWidth=1440
+PASS masaustu-1440: hero başlığı kırpılmıyor :: title scroll=1240 client=1240
+PASS masaustu-1440: konsol hatası yok
+PASS mobil-390: yatay taşma yok :: scrollWidth=390 clientWidth=390
+PASS mobil-390: hero başlığı kırpılmıyor :: title scroll=358 client=358
+PASS mobil-390: konsol hatası yok
+PASS dar-320: yatay taşma yok :: scrollWidth=320 clientWidth=320
+PASS dar-320: hero başlığı kırpılmıyor :: title scroll=288 client=288
+PASS dar-320: konsol hatası yok
+PASS genis-2560: yatay taşma yok :: scrollWidth=2560 clientWidth=2560
+PASS genis-2560: hero başlığı kırpılmıyor :: title scroll=1240 client=1240
+PASS genis-2560: konsol hatası yok
+PASS JS kapalı: #h-title var
+PASS JS kapalı: #h-frc var
+PASS JS kapalı: #h-robot var
+PASS JS kapalı: #h-takim var
+PASS JS kapalı: #h-spon var
+PASS JS kapalı: #h-ilet var
+PASS JS kapalı: 5 menü bağlantısı
+PASS JS kapalı: bölüm metni okunur :: "FRC nedir?"
+PASS JS kapalı mobil: ilk menü bağlantısı görünür
+PASS JS kapalı mobil: menü düğmesi gizli
+PASS marka büyük harfle BREAKPOINT :: "BREAKPOINT"
+PASS kimlik bandı BREAKPOINT 12050 :: "BREAKPOINT 12050"
+PASS ?kalite=duz → T0 :: gerçek=T0
+PASS ?kalite=dusuk → T1 :: gerçek=T1
+PASS ?kalite=orta → T2 :: gerçek=T2
+PASS ?kalite=yuksek → T3 :: gerçek=T3
+PASS ?kalite=bozuk → T0 :: gerçek=T0
+PASS ?kalite= → T0 :: gerçek=T0
+PASS ?kalite=YUKSEK → T0 :: gerçek=T0
+PASS localStorage engelli: algılama biter (data-tier-ready)
+PASS localStorage engelli: konsol hatası yok
+PASS localStorage engelli: h1 görünür
+PASS localStorage engelli: ?kalite=duz → T0 :: gerçek=T0
+PASS kayıtlı tercih orta + ?kalite=bozuk → T2 :: gerçek=T2
+PASS kayıtlı tercih orta + ?kalite= → T2 :: gerçek=T2
+PASS kayıtlı tercih orta + ?kalite=YUKSEK → T2 :: gerçek=T2
+PASS T0 (?kalite=duz): süs animasyonu yok :: animationName=none
+PASS T2 (?kalite=orta): süs animasyonu çalışır :: animationName=pulse
+PASS hareket azaltma: T3'te bile süs animasyonu yok :: animationName=none
+PASS Robot: ikinci parça seçilir
+PASS Robot: ilk parça bırakılır
+PASS Robot: çizim 1 görünür
+PASS Kalite seçici alt bilgide var (özellik bayrağı açık)
+PASS Mobil menü açılır
+PASS aria-expanded true
+PASS Bağlantıya tıklayınca menü kapanır
+PASS Cam: açılışta site kilitli (inert) ve cam görünür :: {"glassOn":true,"inert":true,"glassVisible":true}
+PASS Cam: kırılınca site açılır, canlı panel dolar, darbe izi çizilir :: {"live":true,"inert":false,"shards":"cam parçası89","scar":7028}
+PASS Cam: 'Tekrar kır' camı yeniden kapatır ve paneli sıfırlar :: {"glassOn":true,"live":false,"shards":"cam parçası–"}
+PASS Cam: konsol hatası yok
+PASS Hareket azaltma: cam gösterilmez, site açık :: {"glass":"none","live":true,"inert":false,"glassOn":false}
+PASS 3B T3 (?kalite=yuksek): motor başlar
+PASS 3B T3: html.gl, kademe ve iz yüksekliği :: cls=__variable_2ae990 __variable_8143f1 __variable_60e88c gl short live track=16569
+PASS 3B T3: FRC levhası istasyonda görünür :: {"op":0.995,"act":true,"on":true,"i":1}
+PASS 3B T3: menü 'Takım' bağlantısı takım istasyonuna götürür :: {"i":3,"ph":"d","cur":"#takim"}
+PASS 3B T3: konsol hatası yok
+PASS 3B T2 (?kalite=orta): motor başlar
+PASS 3B T2: html.gl, kademe ve iz yüksekliği :: cls=__variable_2ae990 __variable_8143f1 __variable_60e88c gl short live track=16569
+PASS 3B T2: FRC levhası istasyonda görünür :: {"op":1,"act":true,"on":true,"i":1}
+PASS 3B T2: menü 'Takım' bağlantısı takım istasyonuna götürür :: {"i":3,"ph":"d","cur":"#takim"}
+PASS 3B T2: konsol hatası yok
+PASS 3B T1 (?kalite=dusuk): motor başlar
+PASS 3B T1: html.gl, kademe ve iz yüksekliği :: cls=__variable_2ae990 __variable_8143f1 __variable_60e88c gl short live track=16569
+PASS 3B T1: FRC levhası istasyonda görünür :: {"op":1,"act":true,"on":true,"i":1}
+PASS 3B T1: menü 'Takım' bağlantısı takım istasyonuna götürür :: {"i":3,"ph":"d","cur":"#takim"}
+PASS 3B T1: konsol hatası yok
+PASS T0: html.gl yok, motor yok, canvas yok :: {"gl":false,"engine":false,"canvas":0,"track":""}
+PASS T0: three / uçuş parçası indirilmez
+PASS Seçici: ilk motor
+PASS Seçici → Düz: gl kalkar, satır içi stiller ve canvas temizlenir :: {"cls":"__variable_2ae990 __variable_8143f1 __variable_60e88c live","styled":0,"canvas":0,"track":""}
+PASS Seçici: 3 aç/kapa sonrası GPU kaynakları sabit (sızıntı yok) :: ilk geo=6 tex=0; son geo=6 tex=0
+PASS Seçici: konsol hatası yok
+PASS Hareket azaltma + ?kalite=orta: 3B açıkça istendiği için başlar
+PASS Hareket azaltma: giriş düşüşü atlanır (intro=1) :: intro=1
+PASS Mobil 3B: motor başlar
+PASS Mobil 3B: yatay taşma yok :: {"sw":390,"cw":390}
+PASS Mobil 3B: konsol hatası yok
+
+TÜM KONTROLLER GEÇTİ

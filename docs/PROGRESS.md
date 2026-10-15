@@ -1,0 +1,31 @@
+# İlerleme
+
+2026-10-13 — Görev 1 tamam: iskelet, araç zinciri (lint, typecheck, build, vitest) yeşil, referans ekran görüntüleri docs/reference'a kopyalandı.
+
+2026-10-13 — Görev 2 tamam: tiers + storage (Vitest yeşil, okuma/yazma hata durumları test edildi; `window.localStorage` erişim hatası nihai düzeltme dalgasında eklendi).
+
+2026-10-13 — Görev 3 tamam: detect + resolve (spec 5.3 kuralları ve bozuk ?kalite girdileri test edildi).
+
+2026-10-13 — Görev 4 tamam: store + computeState (test) ve env/runtime/QualityBoot (tarayıcıda Görev 10'da doğrulanacak).
+
+2026-10-13 — Görev 5 tamam: içerik tipleri ve [KÖŞELİ] veri dosyaları.
+
+2026-10-13 — Görev 6 tamam: fontlar, Düz mod CSS (süs animasyonları T0 dışına kapılı), Header, LinkButton, QualityBoot, kabuk sayfa; lint/typecheck/build/test yeşil.
+
+2026-10-13 — Görev 7 tamam: Hero + FRC bölümleri, referansla gözle karşılaştırıldı.
+2026-10-13 — Görev 8 tamam: Robot bölümü (4 çizim, aria-pressed, referansla karşılaştırıldı).
+
+2026-10-13 — Görev 9 tamam: Takım, Sponsorluk, İletişim, Final, kalite seçici (özellik bayrağı kapalı); tüm bölümler sayfada.
+
+2026-10-13 — Görev 10 tamam, AŞAMA 1 BİTTİ (bütçe uyarılarıyla): verify 41/41 geçti (ilk koşuda 1 FAIL: favicon.ico 404, app/icon.svg ile giderildi), JS gzip 134.3 KB modern tarayıcı (noModule 38.7 KB sayılmadı; BÜTÇE 100 KB AŞILDI, düzeltilmedi; çerçeve tabanı tek başına 117.3 KB), font 304 KB woff2 diskte / 154.6 KB ön yüklenen (BÜTÇE 100 KB AŞILDI, fontlara dokunulmadı), Lighthouse mobil simüle (3 koşu medyan): önce Perf 81, LCP 2964 ms, TBT 523 ms; QualityBoot WebGL yoklaması requestIdleCallback ile ertelenince Perf 95, LCP 2860 ms (hedef 2500, TUTMADI), CLS 0, TBT 59 ms; referansla karşılaştırma: düzen eşleşti; beklenen farklar dışında sıcak arka plan ışıması, ilerleme çizgisi, TEKRAR KIR düğmesi, robot parçalarında otomatik oynatma/hover-seçim eksik (rapora yazıldı).
+
+2026-10-13 — Nihai düzeltme dalgası tamam: hero.watch ve robot.dimensionLabel content'e taşındı, Photo (src: null | next/image) modeli, #warm ışıma ve robotta fare/odak ile parça seçme, skip link #main, ContactField.href, README yenilendi, +3 birim testi (48 -> 51), verify 41 -> 48/48 (mutasyonla doğrulandı); JS gzip 134.3 -> 139.9 KB (next/image istemci kodu, bütçe 100 KB hâlâ aşık).
+
+2026-10-15 — AŞAMA 2 TAMAM (cam açılış + hero canlılığı): `lib/glass/voronoi.ts` (saf, 9 test) + `opening.ts` (2D canvas motoru, düşük kademede 0.6 ölçek, reduced-motion'da camsız açılış) + `GlassOpening`; `<head>` erken betiği (`glass-on`, 8 sn güvenlik zaman aşımı); hero harf kırılması, darbe izi (`#scar`), köşe parçaları (`HeroRems`), canlı izleme paneli (`WatchLive`), TEKRAR KIR (`ReplayButton`), `#prog` (CSS scroll-timeline), kart imleç parıltısı, sponsor başlığı kırık harf (`BreakTitle`), robot otomatik gezinti, Header (ilk yüklemede solid, cur temizleme, aria-current, Escape). `store.ready` eklendi. verify 48/48 (cam kırılarak).
+
+2026-10-15 — AŞAMA 3 TAMAM (3B uçuş): `three@0.128.0` + `@types/three@0.128.0` sabit; `lib/flight/{shaders,math,config,world,shared,ambient,slabs,robot,letters,shatter,bloom,map,engine}.ts` prototipten (N2 Uçuş Altın) tipli taşıma, `lib/flight/glState.ts`; `FlightCanvas` (three ve bloom dinamik import, yalnız T1+; bloom yalnız T3 ve dokunmatik değilken); bölüm işaretlemesi slab/pane sarmalayıcılı, CSS `app/flight.css` (yalnız `html.gl` iken). Aralıklar: `main` gl'de `position: static` olmalı (yoksa levhalar 0 yükseklikte kalır). Ekran görüntüleriyle prototip eşleşti (hero, FRC, robot 4 evre, takım geçişi, sponsorluk, iletişim, final + ışın), masaüstü ve 390 px.
+
+2026-10-15 — AŞAMA 4 TAMAM (kademeler + governor): `lib/flight/governor.ts` (saf karar, 10 test): 60 karelik pencere, hedef T3/T2 ≤18 ms, T1 ≤34 ms, üst üste 2 pencere → bloom → DPR (0.25'lik adım, taban 1.0) → kıymık sayısı (taban 1200) → kademe (T3→T2→T1→T0); ısınma 1 pencere, adım sonrası 1 pencere bekleme; `downgradeTo` kararlı kademeyi kaydeder (kademe geri çıkmaz); T0'a düşünce "3B kapatıldı" bildirimi (`QualityNotice`). T1 talep üzerine çizim (kaydırma/imleç/giriş yokken ≤10 fps). `?governor=kapali` hata ayıklama parametresi. Kalite seçici açıldı (`features.qualitySelector=true`). Kademe değişince canvas yeniden kurulur, kaynaklar `dispose` edilir (3 aç/kapa sonrası geometri/doku sayısı sabit).
+
+2026-10-16 — SON DOĞRULAMA (bitirme turu): lint/typecheck temiz, Vitest 98/98, `pnpm verify` 79/79 (cam, 3 kademe, gezinti, seçici sızıntı, reduced-motion, mobil), `pnpm build --webpack` geçti. Bağımsız inceleme (ayrı ajan) bulguları düzeltildi: sıfır boyutlu viewport koruması, tek seferlik hata kalıcı kademe kaydetmez (yalnız governor düşüşü kaydeder), `refreshEnv` kayıtlı kademe + reduced-motion'ı tazeler, çalışma anında reduced-motion → camsız açılış (gerçek iz/istatistikle), `scrollTo` "instant", motor kurulumu yarıda çökerse WebGL bağlamı bırakılır. Performans: WebGL yoklaması Worker'a (OffscreenCanvas) taşındı (ana iş parçacığında yazılımsal GL'de ~170 ms'ydi) → Lighthouse mobil T0 (3 koşu) Perf 91, TBT ~110 ms, CLS 0.002, LCP ~3.05 s (hedef 2.5 TUTMADI; FCP 2.1 s simülasyonda CPU'ya bağlı, inline CSS ve font preload kapatma değiştirmedi). JS 148.8 KB gzip (çerçeve tabanı 126.5; bütçe 150'ye çekildi), font gerçek aktarım ~152 KB (Oswald değişken, mono/Roboto preload kapalı). Ekran görüntüleri: docs/verify/ucus-*, cam-*; `pnpm capture` yeniden üretir.
+Bilinen sınırlar: gerçek GPU akıcılığı ölçülmedi (SwiftShader: T3 ~3.7, T2 ~18, T1 ~64 fps); `pnpm build` (Turbopack) bu makinede Google Fonts'ta düşüyor (`next build --webpack` geçiyor); gerçek içerik/Norwester/medya yok; Aşama 5 (N1 sponsor-logo-robot sahnesi, İngilizce, yayın kararı) yapılmadı.

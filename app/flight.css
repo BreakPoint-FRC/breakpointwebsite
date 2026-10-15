@@ -1,0 +1,625 @@
+/* Aşama 3: 3B uçuş katmanı. Bu dosyadaki kuralların çoğu yalnız html.gl iken geçerlidir;
+   html.gl sınıfını uçuş motoru (lib/flight/engine.ts) ekler. Düz modda (T0) hiçbir etkisi yoktur. */
+
+@layer components {
+  /* ---------- WebGL katmanı ---------- */
+  #gl {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: none;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.8s ease 0.15s;
+  }
+  html.gl #gl {
+    display: block;
+  }
+  html.glass-on #gl {
+    opacity: 0;
+    transition: none;
+  }
+  #flash {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at 70% 34%, rgba(254, 210, 51, 0.55), rgba(254, 210, 51, 0.12) 38%, transparent 62%);
+  }
+  #track {
+    display: none;
+    width: 1px;
+    pointer-events: none;
+  }
+  html.gl #track {
+    display: block;
+  }
+  html.gl #stage {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  html.gl .warm {
+    z-index: 0;
+  }
+  /* levhalar #stage'e göre konumlanır (main'in yüksekliği 0 olur) */
+  html.gl main {
+    position: static;
+    z-index: auto;
+  }
+
+  /* ---------- Levha (bölüm) ---------- */
+  .slab {
+    position: relative;
+  }
+  .ovl {
+    width: 100%;
+  }
+  html.gl .slab {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+  html.gl .slab.act {
+    pointer-events: auto;
+  }
+  html.gl .pane {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    overflow: hidden;
+    background: rgba(21, 17, 9, 0.52);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--ch, 24px)), calc(100% - var(--ch, 24px)) 100%, 0 100%);
+  }
+  html.gl .pane .slab-in {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: clamp(20px, 2.6vw, 38px);
+    will-change: transform;
+  }
+  html.gl .ovl {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  html.gl .hero {
+    height: 100%;
+    padding-block: 92px 52px;
+    justify-content: safe center;
+    min-height: 0;
+  }
+  html.gl .title {
+    font-size: min(16.4vw, 13.4rem, 25vh);
+  }
+  html.gl .cue {
+    display: flex;
+  }
+  html.gl .s-final {
+    padding-block: 0;
+  }
+  html.gl .giant {
+    display: none;
+  }
+  html.gl.no-letters .s-final .giant {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+  }
+  html.gl .s-final .foot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 0;
+    border-top: 0;
+    padding-block: 18px 26px;
+    background: linear-gradient(transparent, rgba(18, 16, 12, 0.86) 55%);
+    transition: opacity 0.3s;
+  }
+
+  /* levha içeriğinin görününce açılması */
+  html.gl .slab:not(.on) .rv,
+  html.gl .slab:not(.on) .reveal {
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html.gl .slab.on .rv {
+      animation: rv 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+      animation-delay: calc(var(--r, 0) * 90ms + 140ms);
+    }
+    html.gl .slab.on .reveal {
+      animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+      animation-delay: calc(var(--d, 0s) + 0.25s);
+    }
+  }
+
+  /* ---------- Robot (3B) ---------- */
+  html.gl .rail,
+  html.gl .stick {
+    height: 100%;
+    padding-block: 0;
+  }
+  html.gl .stick {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  html.gl .rwrap {
+    grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
+  }
+  html.gl .ph {
+    display: none;
+  }
+  html:not(.gl) .hud,
+  html:not(.gl) .pdesc {
+    display: none;
+  }
+  html.gl .robot-copy {
+    background: var(--line);
+    padding: 1px;
+    clip-path: polygon(18px 0, 100% 0, 100% 100%, 0 100%, 0 18px);
+  }
+  html.gl .robot-copy .rin {
+    background: rgba(18, 16, 12, 0.84);
+    clip-path: polygon(17px 0, 100% 0, 100% 100%, 0 100%, 0 17px);
+    padding: clamp(20px, 2.6vw, 32px);
+  }
+  html.gl .robot-copy h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  html.gl .part.is-on .bar {
+    transform: scaleX(var(--pp, 0));
+  }
+  .pdesc {
+    display: none;
+  }
+  .hud {
+    position: absolute;
+    right: var(--gut);
+    bottom: 28px;
+    z-index: 2;
+    display: grid;
+    gap: 8px;
+    width: min(300px, 40vw);
+    font-size: 0.8125rem;
+    color: var(--mute);
+    text-align: right;
+  }
+  .hud b {
+    color: var(--white);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .hud .hb {
+    height: 2px;
+    background: var(--line);
+  }
+  .hud .hb i {
+    display: block;
+    height: 100%;
+    background: var(--yellow);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  /* ---------- Konum etiketi ve uçuş göstergesi ---------- */
+  .stn {
+    display: none;
+  }
+  html.gl .stn {
+    position: fixed;
+    left: var(--gut);
+    bottom: 18px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8125rem;
+    color: var(--mute);
+    pointer-events: none;
+    text-shadow: 0 0 8px var(--bg);
+  }
+  html.gl .stn i {
+    width: 10px;
+    height: 10px;
+    background: var(--yellow);
+    clip-path: polygon(0 0, 100% 0, 100% 64%, 76% 58%, 62% 100%, 0 100%);
+  }
+  html.glass-on .stn {
+    opacity: 0;
+  }
+  .flight {
+    display: none;
+  }
+  html.gl .flight {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 21;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    opacity: 0;
+    pointer-events: none;
+    font: 400 0.78rem/1 var(--f-mono);
+    color: #d9d3c5;
+    text-shadow:
+      0 0 8px var(--bg),
+      0 0 3px var(--bg);
+  }
+  .flight .ar {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--yellow);
+    border-bottom: 2px solid var(--yellow);
+    transform: rotate(45deg);
+  }
+  .flight .bar {
+    display: block;
+    width: clamp(120px, 22vw, 220px);
+    height: 2px;
+    background: var(--line);
+  }
+  .flight .bar i {
+    display: block;
+    height: 100%;
+    background: var(--yellow);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  html.glass-on .flight {
+    display: none;
+  }
+
+  /* ---------- Gren (yalnız T3) ---------- */
+  .grain {
+    display: none;
+    position: fixed;
+    left: -60px;
+    top: -60px;
+    right: -60px;
+    bottom: -60px;
+    z-index: 40;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 .9  0 0 0 0 .65  0 0 1.7 0 -.55'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  }
+  html.gl[data-tier="T3"] .grain {
+    display: block;
+  }
+  html.glass-on .grain {
+    opacity: 0.03;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html.gl[data-tier="T3"] .grain {
+      animation: grain 1s steps(1) infinite;
+    }
+    html.gl .flight .ar {
+      animation: nudge 1.4s ease-in-out infinite;
+    }
+  }
+
+  /* ---------- Hero parçalanması ---------- */
+  .shat {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    perspective: 760px;
+    z-index: 2;
+  }
+  .sp {
+    position: absolute;
+    will-change: transform, opacity;
+  }
+  .spi {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .sp *,
+  .sp *::before,
+  .sp *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .sp .se {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .sp .se polygon {
+    fill: none;
+    stroke: rgba(254, 210, 51, 0.55);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+  }
+  .slab.shat-on .hero {
+    visibility: hidden;
+  }
+  .s-hero .rems {
+    opacity: calc(1 - var(--hp, 0) * 1.3);
+  }
+  .s-hero .rem-a {
+    translate: calc(var(--hp, 0) * -420px) calc(var(--hp, 0) * -300px);
+    rotate: calc(var(--hp, 0) * -36deg);
+  }
+  .s-hero .rem-b {
+    translate: calc(var(--hp, 0) * 420px) calc(var(--hp, 0) * -280px);
+    rotate: calc(var(--hp, 0) * 30deg);
+  }
+  .s-hero.shat-on .scar {
+    transition: none;
+    opacity: calc(1 - var(--hp, 0) * 1.4);
+    scale: calc(1 + var(--hp, 0) * 0.45);
+    transform-origin: 70% 34%;
+  }
+
+  /* ---------- Alçak ekranlar (dizüstü): levha içerikleri daha sıkı ---------- */
+  html.short .pane .slab-in {
+    padding: 18px 28px;
+  }
+  html.short h2 {
+    font-size: clamp(2rem, 4.2vw, 3rem);
+  }
+  html.short .pane .lead {
+    font-size: 1.2rem;
+    line-height: 1.35;
+  }
+  html.short .team-h .lead,
+  html.short .ct .lead {
+    margin-top: 6px;
+  }
+  html.short .idc .photo {
+    aspect-ratio: 1 / 0.74;
+  }
+  html.short .idc .bc {
+    display: none;
+  }
+  html.short .idc-in {
+    padding-bottom: 20px;
+  }
+  html.short .cards {
+    margin-top: 16px;
+  }
+  html.short .packs {
+    margin-top: 14px;
+    padding-block: 12px;
+    gap: 18px;
+  }
+  html.short .card-in {
+    padding: 44px 22px 20px;
+    gap: 10px;
+  }
+  html.short .price {
+    font-size: 1.9rem;
+  }
+  html.short .perks {
+    gap: 6px;
+  }
+  html.short .steps {
+    margin-top: 16px;
+  }
+  html.short .fields div {
+    padding-block: 9px;
+  }
+  html.short .hero-row {
+    margin-top: 22px;
+  }
+  html.short .watch-in {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  html.short .watch dl > div {
+    padding-block: 3px;
+  }
+  html.short .sig {
+    height: 20px;
+  }
+  html.short .hero-copy {
+    gap: 22px;
+  }
+
+  /* ---------- Duyarlı ---------- */
+  @media (max-width: 859px) {
+    html.gl .rwrap {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    html.gl .stick {
+      align-items: flex-end;
+      padding-bottom: 36px;
+    }
+    html.gl .robot-copy h2 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+    html.gl .robot-copy .intro {
+      display: none;
+    }
+    html.gl .robot-copy .rin {
+      padding: 16px 16px 14px;
+    }
+    html.gl .parts {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 4px;
+    }
+    html.gl .parts li,
+    html.gl .parts li:last-child {
+      border: 0;
+    }
+    html.gl .part {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 10px 0 12px;
+      justify-items: start;
+    }
+    html.gl .part .mk {
+      grid-row: auto;
+      margin: 0 0 6px;
+    }
+    html.gl .part .pn {
+      font-size: 0.9rem;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+    html.gl .part .pd {
+      display: none;
+    }
+    html.gl .part .bar {
+      bottom: 0;
+    }
+    html.gl .pdesc {
+      display: block;
+      margin-top: 10px;
+      min-height: 3em;
+      color: var(--white);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    html.gl .hud {
+      right: auto;
+      left: var(--gut);
+      top: 72px;
+      bottom: auto;
+      text-align: left;
+      width: min(340px, calc(100vw - 32px));
+    }
+    html.gl .stn {
+      bottom: 10px;
+    }
+    html.gl .flight {
+      left: auto;
+      right: var(--gut);
+      transform: none;
+      justify-items: end;
+      bottom: 14px;
+    }
+    html.gl .s-final .foot {
+      padding-block: 12px 34px;
+    }
+    html.gl .pane .slab-in {
+      padding: 18px 16px;
+    }
+  }
+  @media (max-width: 519px) {
+    html.gl .pane h2 {
+      font-size: clamp(1.9rem, 9vw, 2.4rem);
+    }
+    html.gl .lead {
+      font-size: 1.2rem;
+    }
+    html.gl .big {
+      display: none;
+    }
+  }
+}
+
+@keyframes rv {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  17% {
+    transform: translate(-24px, 14px);
+  }
+  33% {
+    transform: translate(18px, -22px);
+  }
+  50% {
+    transform: translate(-12px, -30px);
+  }
+  67% {
+    transform: translate(26px, 20px);
+  }
+  83% {
+    transform: translate(-30px, 6px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes nudge {
+  0%,
+  100% {
+    translate: 0 -2px;
+    opacity: 0.5;
+  }
+  50% {
+    translate: 0 3px;
+    opacity: 1;
+  }
+}
+
+@layer components {
+  .qnote {
+    position: fixed;
+    left: 50%;
+    top: 76px;
+    transform: translateX(-50%);
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: calc(100vw - 32px);
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line-hi);
+    color: var(--white);
+    font-size: 0.8125rem;
+  }
+  .qnote button {
+    min-width: 32px;
+    min-height: 32px;
+    background: transparent;
+    border: 1px solid var(--mute);
+    color: var(--white);
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+}
