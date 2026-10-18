@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { RobotDrawing } from "./RobotDrawing";
 import { robot } from "@/content/robotParts";
@@ -54,13 +53,14 @@ export function Robot() {
             <figure className="ph" aria-label={robot.photoLabel}>
               <div className="ph-in">
                 {robot.photo.src !== null ? (
-                  <Image
+                  // next/image burada `unoptimized` + `fill` idi: optimizasyon yapmıyordu, yalnız ~6 KB gzip istemci kodu ekliyordu.
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
                     src={robot.photo.src}
                     alt={robot.photo.alt}
-                    fill
-                    unoptimized
-                    sizes="(min-width: 860px) 50vw, 100vw"
-                    className="object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 ) : null}
                 <span className="tick tl"></span>

@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   COUNT_FLOOR,
+  MAX_TRUSTED_FRAME_MS,
   OVER_WINDOWS,
+  SEVERE_FACTOR,
   WARMUP_WINDOWS,
   createGovernorState,
   stepGovernor,
@@ -25,11 +27,29 @@ function overWindows(s: ReturnType<typeof createGovernorState>, info: GovernorIn
   return last;
 }
 
+function overWindows2(s: ReturnType<typeof createGovernorState>, ms: number, info: GovernorInfo): GovernorAction {
+  let last: GovernorAction = { kind: "none" };
+  for (let i = 0; i < OVER_WINDOWS; i++) last = stepGovernor(s, ms, info);
+  return last;
+}
+
 describe("targetMs", () => {
   it("T3/T2 18 ms, T1 34 ms", () => {
     expect(targetMs("T3")).toBe(18);
     expect(targetMs("T2")).toBe(18);
     expect(targetMs("T1")).toBe(34);
+  });
+  it("60 Hz ve üstü yenilemede hedef tabanda kalır (60 Hz'de +0.04 ms pay, 120 Hz'de değişmez)", () => {
+    expect(targetMs("T3", 16.7)).toBeCloseTo(18, 1);
+    expect(targetMs("T2", 8.3)).toBe(18);
+    expect(targetMs("T1", 16.7)).toBe(34);
+  });
+  it("30 Hz sınırında hedef yenileme aralığının üstüne çıkar", () => {
+    expect(targetMs("T3", 33.3)).toBeCloseTo(33.3 * 1.08, 5);
+    expect(targetMs("T1", 33.3)).toBeCloseTo(35.964, 3);
+  });
+  it("güvenilmez ölçüm (null, NaN, sıfır, çok büyük) yok sayılır", () => {
+    for (const bad of [null, Number.NaN, 0, -5, MAX_TRUSTED_FRAME_MS + 1, Infinity]) expect(targetMs("T3", bad)).toBe(18);
   });
 });
 
@@ -69,8 +89,35 @@ describe("stepGovernor", () => {
   it("hiçbir şey kalmayınca kademe düşer: T3→T2, T2→T1, T1→T0", () => {
     for (const [from, to] of [["T3", "T2"], ["T2", "T1"], ["T1", "T0"]] as const) {
       const s = warmed();
-      expect(overWindows(s, { tier: from, hasBloom: false, dpr: 1.0, count: COUNT_FLOOR })).toEqual({ kind: "tier", to });
+      expect(overWindows(s, { tier: from, hasBloom: false, dpr: 1.0, count: COUNT_FLOOR })).toMatchObject({ kind: "tier", to });
     }
+  });
+  it("30 Hz sınırında (33.3 ms) sağlıklı cihaz kademe düşürülmez; ölçüm yoksa düşer ama kaydedilmez", () => {
+    const base = { tier: "T3", hasBloom: false, dpr: 1.0, count: COUNT_FLOOR } as const;
+    const s = warmed();
+    let last: GovernorAction = { kind: "none" };
+    for (let i = 0; i < 20; i++) last = stepGovernor(s, 33.3, { ...base, frameMs: 33.3 });
+    expect(last).toEqual({ kind: "none" });
+    const s2 = warmed();
+    for (let i = 0; i < OVER_WINDOWS; i++) last = stepGovernor(s2, 33.3, base);
+    expect(last).toEqual({ kind: "tier", to: "T2", severe: false });
+  });
+  it("kademe düşüşü yalnız ölçüm güvenilirse ve ortalama hedefin 1.5 katını aşıyorsa severe", () => {
+    const info = { tier: "T3", hasBloom: false, dpr: 1.0, count: COUNT_FLOOR, frameMs: 16.7 } as const;
+    const severeMs = targetMs("T3", 16.7) * SEVERE_FACTOR + 1;
+    const mild = warmed();
+    expect(overWindows2(mild, 22, info)).toEqual({ kind: "tier", to: "T2", severe: false });
+    const bad = warmed();
+    expect(overWindows2(bad, severeMs, info)).toEqual({ kind: "tier", to: "T2", severe: true });
+    const unknown = warmed();
+    expect(overWindows2(unknown, severeMs, { ...info, frameMs: null })).toEqual({ kind: "tier", to: "T2", severe: false });
+  });
+  it("sayaç sıfırlanınca severe ortalaması önceki pencerelerden etkilenmez", () => {
+    const info = { tier: "T3", hasBloom: false, dpr: 1.0, count: COUNT_FLOOR, frameMs: 16.7 } as const;
+    const s = warmed();
+    stepGovernor(s, 100, info);
+    stepGovernor(s, fast, info);
+    expect(overWindows2(s, 22, info)).toEqual({ kind: "tier", to: "T2", severe: false });
   });
   it("adımdan sonra bekleme penceresi yeni adım atmaz", () => {
     const s = warmed();

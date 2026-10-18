@@ -7,7 +7,7 @@ import type { FlightEngine } from "@/lib/flight/engine";
 import { deriveQuality } from "@/lib/flight/config";
 import { createGovernor } from "@/lib/flight/governor";
 import { setNotice } from "@/lib/quality/notice";
-import { downgradeTo } from "@/lib/quality/runtime";
+import { downgradeTo, getFrameMs } from "@/lib/quality/runtime";
 import { TIERS } from "@/lib/quality/tiers";
 import { useQuality } from "@/lib/quality/useQuality";
 
@@ -51,11 +51,16 @@ function FlightLayer({ tier }: { tier: "T1" | "T2" | "T3" | "T0" }) {
         const quality = deriveQuality(spec, coarse);
         // ?governor=kapali: hata ayıklama ve yazılımsal GL altında doğrulama için kare yöneticisini kapatır.
         const governorOff = new URLSearchParams(window.location.search).get("governor") === "kapali";
-        const governor = createGovernor(quality, (next) => {
-          if (cancelled) return;
-          downgradeTo(next, true);
-          if (next === "T0") setNotice({ kind: "threeD-off" });
-        });
+        const governor = createGovernor(
+          quality,
+          (next, severe) => {
+            if (cancelled) return;
+            // Yalnız belirgin kötü ve sekme görünürken ölçülen düşüş sonraki ziyaretlere taşınır.
+            downgradeTo(next, severe && !document.hidden);
+            if (next === "T0") setNotice({ kind: "threeD-off" });
+          },
+          getFrameMs,
+        );
         // Cam zaten kırıldıysa düz sayfadaki kaydırma konumu 3B haritayla eşleşmez: baştan başlanır.
         const glassOpen = root.classList.contains("live");
         if (glassOpen) window.scrollTo({ top: 0, left: 0, behavior: "instant" });
