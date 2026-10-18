@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { features, site } from "@/content/site";
 import { team } from "@/content/team";
 
@@ -26,13 +25,14 @@ export function Team() {
                   </div>
                   <div className="photo">
                     {card.photo.src !== null ? (
-                      <Image
+                      // next/image burada `unoptimized` + `fill` idi: optimizasyon yapmıyordu, yalnız ~6 KB gzip istemci kodu ekliyordu.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
                         src={card.photo.src}
                         alt={card.photo.alt}
-                        fill
-                        unoptimized
-                        sizes="(min-width: 860px) 25vw, 50vw"
-                        className="object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 h-full w-full object-cover"
                       />
                     ) : (
                       <>

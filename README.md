@@ -42,8 +42,10 @@ Takım kartları (`content/team.ts`) ve robot (`content/robotParts.ts`) `photo: 
 
     photo: { src: "/media/robot.jpg", alt: "Robotun yandan görünüşü" },
 
-Görsel `next/image` ile (`unoptimized`, `sharp` gerekmez) gösterilir. Anlamlı bir `alt` yazın; boş `alt`
-yalnızca dekoratif yer tutucu içindir.
+Görsel düz `<img>` ile (`loading="lazy"`, kapsayıcıyı `object-cover` ile doldurur) gösterilir; `next/image`
+bilerek kullanılmaz: `unoptimized` olduğu için optimizasyon yapmıyordu, yalnız ~6 KB gzip istemci kodu ekliyordu.
+Görseli boyutlandırıp sıkıştırmak sizin işinizdir (genişlik ≤ 1600 px, WebP/AVIF önerilir). Anlamlı bir `alt` yazın;
+boş `alt` yalnızca dekoratif yer tutucu içindir.
 
 ## Açılış ve 3B uçuş
 
@@ -69,9 +71,13 @@ Site cihaza göre kademe seçer (`<html data-tier>`), önce **tespit** (hareket 
 | T1 | Düşük | 1200 | 1.0 | yok | talep üzerine (kaydırma/imleç yokken ≤10 fps) |
 | T0 | Düz | 3B yok | n/a | n/a | yok; three hiç indirilmez |
 
-Governor (`lib/flight/governor.ts`): 60 karelik pencere, hedef T3/T2 ≤ 18 ms, T1 ≤ 34 ms. Üst üste 2 pencere
+Governor (`lib/flight/governor.ts`): 60 karelik pencere, hedef T3/T2 ≤ 18 ms, T1 ≤ 34 ms. Kare süresi rAF aralığıyla
+ölçüldüğü için hedef, ekranın boşta ölçülen yenileme aralığının (`lib/quality/frame.ts`) altına inmez: iOS Düşük Güç
+Modu / Chrome Enerji Tasarrufu gibi 30 fps sınırları sağlıklı cihazı düşürmez (hedef ≈ aralık × 1.08). Üst üste 2 pencere
 aşılırsa sırayla bloom → DPR (0.25'lik adım, taban 1.0) → kıymık sayısı (taban 1200) → kademe düşer. Düşen kademe
-oturum boyunca geri çıkmaz ve bir sonraki ziyaret için kaydedilir. T0'a düşünce küçük bir bildirim görünür.
+oturum boyunca geri çıkmaz. Sonraki ziyaretler için yalnız **belirgin kötü** düşüş (ortalama hedefin ≥ 1.5 katı,
+yenileme hızı ölçülebilmişse, sekme görünürken) 7 gün süreyle `bp-kalite-son`'a (`T1@<ms>`) kaydedilir; **Otomatik**
+seçilince kayıt silinir. T0'a düşünce küçük bir bildirim görünür.
 
 Alt bilgideki **Kalite** seçici (Otomatik · Yüksek · Orta · Düşük · Düz) tercihi `localStorage`'a (`bp-kalite`) yazar
 ve tespiti geçersiz kılar. Test için adrese `?kalite=yuksek|orta|dusuk|duz` eklenir (kalıcı DEĞİL). Hata ayıklama:
