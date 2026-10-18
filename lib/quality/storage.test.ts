@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   PREF_KEY,
+  SAVED_TIER_TTL_MS,
   TIER_KEY,
+  clearSavedTier,
   readPreference,
   readSavedTier,
   safeLocalStorage,
@@ -18,6 +20,9 @@ function memory(initial: Record<string, string> = {}): StorageLike & { data: Rec
     setItem: (k, v) => {
       data[k] = v;
     },
+    removeItem: (k) => {
+      delete data[k];
+    },
   };
 }
 
@@ -26,6 +31,9 @@ const throwing: StorageLike = {
     throw new Error("erişim yok");
   },
   setItem: () => {
+    throw new Error("erişim yok");
+  },
+  removeItem: () => {
     throw new Error("erişim yok");
   },
 };
@@ -53,19 +61,41 @@ describe("tercih", () => {
 });
 
 describe("kayıtlı kademe", () => {
-  it("yazıp geri okur", () => {
+  const NOW = 1_700_000_000_000;
+
+  it("zaman damgasıyla yazıp geri okur", () => {
     const s = memory();
-    expect(writeSavedTier(s, "T1")).toBe(true);
-    expect(s.data[TIER_KEY]).toBe("T1");
-    expect(readSavedTier(s)).toBe("T1");
+    expect(writeSavedTier(s, "T1", NOW)).toBe(true);
+    expect(s.data[TIER_KEY]).toBe(`T1@${NOW}`);
+    expect(readSavedTier(s, NOW + 1000)).toBe("T1");
+  });
+  it("süre dolunca unutulur (TTL sınırı dahil)", () => {
+    const s = memory();
+    writeSavedTier(s, "T0", NOW);
+    expect(readSavedTier(s, NOW + SAVED_TIER_TTL_MS - 1)).toBe("T0");
+    expect(readSavedTier(s, NOW + SAVED_TIER_TTL_MS)).toBeNull();
+  });
+  it("zaman damgasız eski biçim ve gelecekteki damga güvenilmez, null döner", () => {
+    expect(readSavedTier(memory({ [TIER_KEY]: "T1" }), NOW)).toBeNull();
+    expect(readSavedTier(memory({ [TIER_KEY]: "T1@" }), NOW)).toBeNull();
+    expect(readSavedTier(memory({ [TIER_KEY]: `T1@${NOW + 5000}` }), NOW)).toBeNull();
   });
   it("yok, bozuk ya da hata durumunda null döner", () => {
-    expect(readSavedTier(memory())).toBeNull();
-    expect(readSavedTier(memory({ [TIER_KEY]: "T9" }))).toBeNull();
-    expect(readSavedTier(null)).toBeNull();
-    expect(readSavedTier(throwing)).toBeNull();
-    expect(writeSavedTier(throwing, "T2")).toBe(false);
-    expect(writeSavedTier(null, "T2")).toBe(false);
+    expect(readSavedTier(memory(), NOW)).toBeNull();
+    expect(readSavedTier(memory({ [TIER_KEY]: `T9@${NOW}` }), NOW)).toBeNull();
+    expect(readSavedTier(memory({ [TIER_KEY]: "T1@abc" }), NOW)).toBeNull();
+    expect(readSavedTier(null, NOW)).toBeNull();
+    expect(readSavedTier(throwing, NOW)).toBeNull();
+    expect(writeSavedTier(throwing, "T2", NOW)).toBe(false);
+    expect(writeSavedTier(null, "T2", NOW)).toBe(false);
+  });
+  it("silinir; depolama yoksa ya da hata verirse çökmeden false döner", () => {
+    const s = memory();
+    writeSavedTier(s, "T1", NOW);
+    expect(clearSavedTier(s)).toBe(true);
+    expect(readSavedTier(s, NOW)).toBeNull();
+    expect(clearSavedTier(null)).toBe(false);
+    expect(clearSavedTier(throwing)).toBe(false);
   });
 });
 
