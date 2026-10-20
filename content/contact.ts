@@ -6,7 +6,7 @@ export const contact: ContactContent = {
   lead: "Sponsorluk paketleri ve diğer sorular için bize yazın.",
   fields: [
     { label: "E-posta", value: "info@breakpointfrc.com", mono: true, href: "mailto:info@breakpointfrc.com" },
-    { label: "Sponsorluk", value: "Kuzey Kahraman, Ahmet Üge", mono: false },
+    { label: "Sponsorluk", value: "Kuzey Kahraman, Ahmet Tunç Üge", mono: false },
     { label: "Instagram", value: "@breakpoint.frc", mono: true, href: "https://instagram.com/breakpoint.frc" },
     { label: "Atölye", value: site.school, mono: false },
     { label: "Şehir", value: site.city, mono: false },
